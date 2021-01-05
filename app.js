@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// var server = require('./server')
+var database = require('./database');
+const { errorLog } = require('./errorHandle');
 
 var app = express();
 
@@ -23,6 +24,9 @@ app.use('/', express.static(path.resolve(`${__dirname}/client/build/`)));
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+// database.createTable('CREATE TABLE students(name varchar2(10))')
+database.insertValues('INSERT INTO books(name) VALUES(?)', ['I too had a love story'], errorLog)
 
 // error handler
 app.use(function (err, req, res, next) {
