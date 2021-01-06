@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 });
 
 // database.createTable('CREATE TABLE students(name varchar2(10))')
-database.insertValues('INSERT INTO books(name) VALUES(?)', ['I too had a love story'], errorLog)
+// database.insertValues('INSERT INTO books(name) VALUES(?)', ['I too had a love story'], errorLog)
 
 // error handler
 app.use(function (err, req, res, next) {
