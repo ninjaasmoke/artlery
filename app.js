@@ -4,8 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var database = require('./database');
-const { errorLog } = require('./errorHandle');
+// var database = require('./database');
+// const { errorLog } = require('./errorHandle');
 
 var app = express();
 
