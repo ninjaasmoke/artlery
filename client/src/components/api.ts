@@ -5,18 +5,10 @@ const endpoint =
         ? 'http://localhost:3080'
         : window.location.origin;
 
-
-
-type Art = {
-    name: string,
-    imageurl: string,
-    price: number,
-    rating: number
-}
 export async function getArt() {
     try {
         const { data } = await axios.get(`${endpoint}/api/gallery`)
-        // console.log(data);
+        console.log(data);
         return data
     } catch (err) {
         console.error(err);
@@ -25,5 +17,11 @@ export async function getArt() {
 }
 
 export async function search(searchText: string) {
-
+    try {
+        const { data } = await axios.get(`${endpoint}/api/search/${searchText}`)
+        return data
+    } catch (err) {
+        console.error(err);
+        return null
+    }
 }

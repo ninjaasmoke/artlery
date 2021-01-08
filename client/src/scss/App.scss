@@ -9,6 +9,10 @@ $primColor: #f9f9f9;
     src: url('../fonts/Product Sans Regular.ttf');
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -99,6 +103,14 @@ nav {
         height: 3px;
         transform: rotate(-45deg) translate(6.5px, -5px);
     } 
+
+    .placeholder-to-center{
+        width: 20px;
+        height: 20px;
+        @media (min-width: 767px) {
+            display: none
+        }
+    }
 }
 
 .nav-space {
@@ -122,6 +134,15 @@ nav {
     font-size: 24px;
     font-weight: 900;
     color: #ef9f4f;
+    letter-spacing: 1px;
+
+    .black-header {
+        color: $accentColor;
+        padding-right: 5px;
+        @media (max-width: 767px) {
+            padding-right: 1px;
+        }
+    }
     
     img {
         height: inherit;
@@ -134,7 +155,9 @@ nav {
     }
 
     @media (max-width: 767px) {
-        font-size: 24px;
+        font-size: 18px;
+        letter-spacing: .5px;
+        font-weight: 600;
     }
 }
 
@@ -155,6 +178,7 @@ nav {
     text-decoration: none;
     @media (max-width: 767px) {
         padding: 0 8px;
+        font-size: 18px;
     }
 }
 
@@ -201,20 +225,27 @@ nav {
     }
 }
 
+.big-empty {
+    width: 100%;
+    text-align: center;
+}
+
 .home-intro {
-    height: 35vh;
-    width: 100vw;
+    height: 30vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 0 4px;
     justify-content: space-around;
     align-items: center;
+
     .home-intro-heading {
         text-align: center;
         font-size: 30px;
         color: $accentColor;
         letter-spacing: 1px;
         font-family: 'Product', sans-serif;
+        font-weight: 900;
         
         @media (max-width: 767px) {
             font-size: 18px;
@@ -231,7 +262,7 @@ nav {
     }
 
     .home-intro-instruction {
-        padding-top: 20px;
+        color: $accent2Color;
     }
 
     @media (max-width: 767px) {
@@ -308,6 +339,95 @@ nav {
             color: $secColor;
             font-family: 'Product';
             font-size: 16px;
+        }
+    }
+}
+
+.input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    #search-text {
+        width: 50%;
+        height: 50px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        padding: 20px;
+        background-color: $secColor;
+
+        @media (max-width: 767px) {
+            width: 100%
+        }
+    }
+}
+
+.search-button {
+    padding-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    button {
+        background-color: $accent2Color;
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        border-radius: 100px;
+        color: $primColor;
+
+        cursor: pointer;
+    }
+
+}
+
+.found-art {
+    margin-top: 30px;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: start;
+
+    .art-image {
+        transition: 400ms ease-out;
+        padding: 2px;
+        height: 100%;
+        width: 50%;
+        object-fit: contain;
+        filter: brightness(80%);
+    }
+    
+    div {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        .art-name {
+            width: 75%;
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .art-about {
+            padding-top: 10px;
+            width: 75%;
+            font-size: 16px;
+        }
+
+        .art-rating {
+            padding-top: 10px;
+            font-size: 24px;
+            color: $accent2Color;
+        }
+
+        .art-price {
+            padding-top: 10px;
+            font-size: 16px;
+            font-weight: 900;
         }
     }
 }

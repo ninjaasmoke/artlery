@@ -3,6 +3,10 @@
   src: url("../fonts/Product Sans Regular.ttf");
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -120,6 +124,17 @@ nav .change .bar3 {
           transform: rotate(-45deg) translate(6.5px, -5px);
 }
 
+nav .placeholder-to-center {
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 767px) {
+  nav .placeholder-to-center {
+    display: none;
+  }
+}
+
 .nav-space {
   height: 60px;
 }
@@ -147,6 +162,18 @@ nav .change .bar3 {
   font-size: 24px;
   font-weight: 900;
   color: #ef9f4f;
+  letter-spacing: 1px;
+}
+
+.header-img .black-header {
+  color: #242428;
+  padding-right: 5px;
+}
+
+@media (max-width: 767px) {
+  .header-img .black-header {
+    padding-right: 1px;
+  }
 }
 
 .header-img img {
@@ -162,7 +189,9 @@ nav .change .bar3 {
 
 @media (max-width: 767px) {
   .header-img {
-    font-size: 24px;
+    font-size: 18px;
+    letter-spacing: .5px;
+    font-weight: 600;
   }
 }
 
@@ -187,6 +216,7 @@ nav .change .bar3 {
 @media (max-width: 767px) {
   .nav-link span {
     padding: 0 8px;
+    font-size: 18px;
   }
 }
 
@@ -246,9 +276,14 @@ nav .change .bar3 {
   }
 }
 
+.big-empty {
+  width: 100%;
+  text-align: center;
+}
+
 .home-intro {
-  height: 35vh;
-  width: 100vw;
+  height: 30vh;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -270,6 +305,7 @@ nav .change .bar3 {
   color: #242428;
   letter-spacing: 1px;
   font-family: 'Product', sans-serif;
+  font-weight: 900;
 }
 
 @media (max-width: 767px) {
@@ -288,7 +324,7 @@ nav .change .bar3 {
 }
 
 .home-intro .home-intro-instruction {
-  padding-top: 20px;
+  color: #ef9f4f;
 }
 
 @media (max-width: 767px) {
@@ -405,5 +441,122 @@ nav .change .bar3 {
   color: #f0f0f0;
   font-family: 'Product';
   font-size: 16px;
+}
+
+.input {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.input #search-text {
+  width: 50%;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+@media (max-width: 767px) {
+  .input #search-text {
+    width: 100%;
+  }
+}
+
+.search-button {
+  padding-top: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.search-button button {
+  background-color: #ef9f4f;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 100px;
+  color: #f9f9f9;
+  cursor: pointer;
+}
+
+.found-art {
+  margin-top: 30px;
+  width: 100%;
+  height: 60vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: start;
+}
+
+.found-art .art-image {
+  -webkit-transition: 400ms ease-out;
+  transition: 400ms ease-out;
+  padding: 2px;
+  height: 100%;
+  width: 50%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -webkit-filter: brightness(80%);
+          filter: brightness(80%);
+}
+
+.found-art div {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.found-art div .art-name {
+  width: 75%;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.found-art div .art-about {
+  padding-top: 10px;
+  width: 75%;
+  font-size: 16px;
+}
+
+.found-art div .art-rating {
+  padding-top: 10px;
+  font-size: 24px;
+  color: #ef9f4f;
+}
+
+.found-art div .art-price {
+  padding-top: 10px;
+  font-size: 16px;
+  font-weight: 900;
 }
 /*# sourceMappingURL=App.css.map */

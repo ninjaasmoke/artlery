@@ -59,7 +59,7 @@ const HomeComp: React.FC<HomeCompProp> = () => {
 
             </div>
             <div className="art">
-                {art.map((artVal: Art, index: number) => (
+                {art.length ? art.map((artVal: Art, index: number) => (
                     <div key={index} className="art-post">
                         <img src={artVal.imageurl} alt={artVal.name} className="art-image" />
                         <div className="img-data-bg">
@@ -68,7 +68,7 @@ const HomeComp: React.FC<HomeCompProp> = () => {
                             </div>
                         </div>
                     </div>
-                ))}
+                )) : <div className="big-empty">Big empty</div>}
             </div>
         </div>
     )

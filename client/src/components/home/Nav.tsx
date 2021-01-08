@@ -21,6 +21,7 @@ const Nav: React.FC<NavProp> = () => {
     return (
         <div>
             <nav>
+                <div className="placeholder-to-center"></div>
                 <Header imgUri={Logo} />
                 <div className="links">
                     <NavLink to="/home" label="Home" toggle={() => toggleNav()} />
@@ -53,7 +54,7 @@ const Header: React.FC<HeaderProp> = ({ imgUri }) => {
     return (
         <div className="header-img">
             {/* <img src={imgUri} alt="Header Image" /> */}
-            Art Gallery
+            <div><span className="black-header">Art</span> Gallery</div>
         </div>
     )
 }
