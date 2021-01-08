@@ -10,21 +10,24 @@ const { verifyuser } = require('./auth')
 const database = require('./databaseHandler')
 
 const app = express();
+const cors = require('cors')
 
 app.set('client', path.join(__dirname, 'client'))
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter)
-// app.use('/', express.static(path.resolve(`${__dirname}/client/build/`)));
-// app.get('/*', (req, res) => res.sendFile(path.resolve(`${__dirname}/client/build/index.html`)))
 
 app.use('/api', apiRoute)
 app.use('/users', userRouter)
+
+// app.use('/', indexRouter)
+app.use('/home', express.static(path.resolve(`${__dirname}/client/build/`)));
+app.get('/home/*', (req, res) => res.sendFile(path.resolve(`${__dirname}/client/build/index.html`)))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

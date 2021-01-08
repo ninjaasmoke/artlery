@@ -1,7 +1,13 @@
 $accentColor: #242428;
 $secColor: #f0f0f0;
-$accent2Color: #ee2763;
-$primColor: #181818;
+// $accent2Color: #ee2763;
+$accent2Color: #ef9f4f;
+$primColor: #f9f9f9;
+
+@font-face {
+    font-family: 'Product';
+    src: url('../fonts/Product Sans Regular.ttf');
+}
 
 * {
     padding: 0;
@@ -12,21 +18,21 @@ $primColor: #181818;
 
 body {
     background-color: $primColor;
-    color: $secColor;
-    font-family: 'Montserrat', sans-serif;
+    color: $accentColor;
+    font-family: 'Product', sans-serif;
 }
 
 nav {
     z-index: 10;
     height: 65px;
     width: 100vw;
-    background-color: $accentColor;
+    background-color: $primColor;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    position: absolute;
+    padding: 0 30px;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -53,7 +59,7 @@ nav {
                 width: 18px;
                 border-radius: 20px;
                 height: 1.5px;
-                background-color: $secColor;
+                background-color: $accentColor;
                 margin-top: 4px;
                 transition: 200ms ease-in;
             }
@@ -109,11 +115,12 @@ nav {
     height: 65px;
     // width: 65px;
     position: relative;
-    font-family: 'Redressed', cursive;
+    font-family: 'Product', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 34px;
+    font-size: 24px;
+    font-weight: 900;
     color: #ef9f4f;
     
     img {
@@ -132,13 +139,15 @@ nav {
 }
 
 .nav-link span {
-    color: $secColor;
+    color: $accentColor;
     transition-duration: 200ms;
-    font-size: 22px;
+    font-size: 14px;
     font-weight: 600;
     width: 40px;
     height: 50px;
     padding: 0 15px;
+    font-family: 'Product';
+    letter-spacing: 1px;
     
     &:hover {
         color: $accent2Color;
@@ -164,8 +173,9 @@ nav {
 .nav-menu {
     height: 100vh;
     width: 100vw;
-    background-color: $accentColor;
+    background-color: $primColor;
     position: fixed;
+    z-index: 5;
     
     display: flex;
     flex-direction: column;
@@ -186,4 +196,118 @@ nav {
 
 .content-body {
     padding: 20px;
+    @media (max-width: 375px) {
+        padding: 0 5px;
+    }
+}
+
+.home-intro {
+    height: 35vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding: 0 4px;
+    justify-content: space-around;
+    align-items: center;
+    .home-intro-heading {
+        text-align: center;
+        font-size: 30px;
+        color: $accentColor;
+        letter-spacing: 1px;
+        font-family: 'Product', sans-serif;
+        
+        @media (max-width: 767px) {
+            font-size: 18px;
+        }
+    }
+    
+    .home-intro-body {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 15px;
+        letter-spacing: 1px;
+        color: $accentColor;
+        font-family: 'Product', sans-serif;
+    }
+
+    .home-intro-instruction {
+        padding-top: 20px;
+    }
+
+    @media (max-width: 767px) {
+        height: 20vh;
+        padding: 10px;
+    }
+}
+
+.art {
+    width: 100%;
+    padding: 40px;
+    @media (max-width: 375px) {
+        padding: 0;
+    }
+}
+
+.art-post {
+    border-radius: 4px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+
+    @media (min-width: 901px) {
+        width: 20%;
+        height: 280px;
+    }
+    @media (max-width: 900px) {
+        width: 25%;
+        height: 250px;
+    }
+    @media (max-width: 767px) {
+        width: 33.33%;
+        height: 200px;
+    }
+    @media (max-width: 375px) {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .art-image {
+        transition: 400ms ease-out;
+        padding: 2px;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        object-fit: cover;
+        filter: brightness(80%);
+    }
+
+    .img-data-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 2px;
+        z-index: 1;
+        transition: 300ms ease-out;
+        &:hover{
+            background-color: rgba($color: #000, $alpha: 0.2);
+        }
+
+        .img-data {
+            padding: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            color: $secColor;
+            font-family: 'Product';
+            font-size: 16px;
+        }
+    }
 }
