@@ -24,6 +24,7 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
+    "sqlite-to-json": "^0.1.3",
     "sqlite3": "^5.0.0"
   },
   "engines": {
