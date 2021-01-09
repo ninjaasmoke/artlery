@@ -390,7 +390,7 @@ nav .placeholder-to-center {
 
 @media (max-width: 576px) {
   .art-post {
-    width: 120px;
+    width: 33.33;
     height: 120px;
     display: -webkit-box;
     display: -ms-flexbox;
