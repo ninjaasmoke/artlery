@@ -23,7 +23,7 @@ body {
 
 nav {
   z-index: 10;
-  height: 65px;
+  height: 50px;
   width: 100vw;
   background-color: #f9f9f9;
   display: -webkit-box;
@@ -43,6 +43,8 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  -webkit-transition: 300ms ease;
+  transition: 300ms ease;
 }
 
 nav .links {
@@ -159,15 +161,15 @@ nav .placeholder-to-center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  font-size: 24px;
-  font-weight: 900;
+  font-size: 20px;
   color: #ef9f4f;
   letter-spacing: 1px;
 }
 
 .header-img .black-header {
   color: #242428;
-  padding-right: 5px;
+  padding-right: 1px;
+  font-weight: 900;
 }
 
 @media (max-width: 767px) {
@@ -578,10 +580,24 @@ nav .placeholder-to-center {
   font-weight: 900;
 }
 
+@media (max-width: 767px) {
+  .found-art div .art-name {
+    width: 100%;
+    padding: 20px;
+  }
+}
+
 .found-art div .art-about {
   padding-top: 10px;
   width: 75%;
   font-size: 16px;
+}
+
+@media (max-width: 767px) {
+  .found-art div .art-about {
+    width: 100%;
+    padding: 20px;
+  }
 }
 
 .found-art div .art-rating {
@@ -651,5 +667,75 @@ nav .placeholder-to-center {
 .found-art div .art-buy:hover {
   background-color: #f9f9f9;
   color: #ef9f4f;
+}
+
+.view-art {
+  width: 100vw;
+}
+
+.jumbo {
+  width: 100%;
+  height: 35vh;
+  position: relative;
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+.jumbo img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 0 30%;
+     object-position: 0 30%;
+}
+
+@media (max-width: 767px) {
+  .jumbo img {
+    display: none;
+  }
+}
+
+.jumbo .image-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 767px) {
+  .jumbo .image-mask {
+    display: none;
+  }
+}
+
+.jumbo .image-dp {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 240px;
+  height: 240px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}
+
+.jumbo .image-dp img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+}
+
+@media (max-width: 767px) {
+  .jumbo {
+    height: 20px;
+  }
 }
 /*# sourceMappingURL=App.css.map */

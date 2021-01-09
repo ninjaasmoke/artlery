@@ -8,7 +8,6 @@ const endpoint =
 export async function getArt() {
     try {
         const { data } = await axios.get(`${endpoint}/api/gallery`)
-        console.log(data);
         return data
     } catch (err) {
         console.error(err);

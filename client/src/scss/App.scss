@@ -28,7 +28,7 @@ body {
 
 nav {
     z-index: 10;
-    height: 65px;
+    height: 50px;
     width: 100vw;
     background-color: $primColor;
     display: flex;
@@ -39,6 +39,7 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
+    transition: 300ms ease;
 
     .links {
         display: flex;
@@ -131,14 +132,14 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 24px;
-    font-weight: 900;
+    font-size: 20px;
     color: #ef9f4f;
     letter-spacing: 1px;
 
     .black-header {
         color: $accentColor;
-        padding-right: 5px;
+        padding-right: 1px;
+        font-weight: 900;
         @media (max-width: 767px) {
             padding-right: 1px;
         }
@@ -435,12 +436,20 @@ nav {
             width: 75%;
             font-size: 30px;
             font-weight: 900;
+            @media (max-width: 767px) {
+                width: 100%;
+                padding: 20px;
+            }
         }
 
         .art-about {
             padding-top: 10px;
             width: 75%;
             font-size: 16px;
+            @media (max-width: 767px) {
+                width: 100%;
+                padding: 20px;
+            }
         }
 
         .art-rating {
@@ -498,4 +507,64 @@ nav {
             }
         }
     }
+}
+
+.view-art {
+    width: 100vw;
+}
+
+.jumbo {
+    width: 100%;
+    height: 35vh;
+    position: relative;
+    overflow-y: visible;
+    overflow-x: hidden;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: 0 30%;
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        .image-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba($color: #000000, $alpha: 0.5);
+            @media (max-width: 767px) {
+                display: none;
+            }
+        }
+
+        .image-dp {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            // left: 50%;
+            // transform: translateX(-50%);
+            width: 240px;
+            height: 240px;
+            border-radius: 4px;
+            background-color: $secColor;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            height: 20px;
+        }
 }

@@ -29,6 +29,7 @@ const Search: React.FC<SearchProp> = () => {
 
     return (
         <div className="content-body">
+            <div className="nav-space"></div>
             <div className="home-intro">
                 <div>
                     <div className="home-intro-heading">
@@ -60,7 +61,7 @@ const Search: React.FC<SearchProp> = () => {
                             <div className="art-price">Price: ${foundArt.price}</div>
                             <div className="art-buttons">
                                 <button className="art-view">View</button>
-                                <div className="art-button-space"></div>
+                                <span className="art-button-space"></span>
                                 <button className="art-buy">Buy Now</button>
                             </div>
                         </div>

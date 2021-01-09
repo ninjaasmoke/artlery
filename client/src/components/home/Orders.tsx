@@ -4,6 +4,7 @@ interface OrderProp { }
 const Orders: React.FC<OrderProp> = () => {
     return (
         <div className="content-body">
+            <div className="nav-space"></div>
             <h2>Orders</h2>
         </div>
     )

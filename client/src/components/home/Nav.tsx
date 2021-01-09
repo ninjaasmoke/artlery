@@ -8,6 +8,18 @@ const Nav: React.FC<NavProp> = () => {
     const [toggle, setToggle] = useState<string>('toggle')
     const [navIsOpen, setNavIsOpen] = useState<boolean>(false)
     const [navH, setNavH] = useState<string>('100vh')
+    const [navcolor, setNavcolor] = useState<string>('transparent')
+
+    useEffect(() => {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= 100) {
+                setNavcolor('#f9f9f9')
+            } else {
+                setNavcolor('transparent')
+            }
+        })
+    }, [])
+
     const toggleNav = () => {
         if (!navIsOpen) {
             setToggle('toggle change')
@@ -20,7 +32,7 @@ const Nav: React.FC<NavProp> = () => {
     }
     return (
         <div>
-            <nav>
+            <nav style={{ backgroundColor: navcolor }}>
                 <div className="placeholder-to-center"></div>
                 <Header imgUri={Logo} />
                 <div className="links">
