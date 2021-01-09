@@ -26,8 +26,8 @@ app.use('/api', apiRoute)
 app.use('/users', userRouter)
 
 // app.use('/', indexRouter)
-app.use('/home', express.static(path.resolve(`${__dirname}/client/build/`)));
-app.get('/home/*', (req, res) => res.sendFile(path.resolve(`${__dirname}/client/build/index.html`)))
+app.use('/', express.static(path.resolve(`${__dirname}/client/build/`)));
+app.get('/*', (req, res) => res.sendFile(path.resolve(`${__dirname}/client/build/index.html`)))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
