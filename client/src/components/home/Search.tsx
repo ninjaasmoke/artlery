@@ -58,6 +58,11 @@ const Search: React.FC<SearchProp> = () => {
                             <div className="art-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem sed tenetur illo, magnam accusamus tempora doloremque modi, odio, earum sunt quas quisquam quae nesciunt ducimus ullam eligendi quos cupiditate.</div>
                             <div className="art-rating">Rating: {foundArt.rating}</div>
                             <div className="art-price">Price: ${foundArt.price}</div>
+                            <div className="art-buttons">
+                                <button className="art-view">View</button>
+                                <div className="art-button-space"></div>
+                                <button className="art-buy">Buy Now</button>
+                            </div>
                         </div>
                     </div>
                     : <div></div>

@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom';
 import { getArt } from '../api';
 import { Art } from '../ContextTypes';
+import Error from './Error';
 
 import Nav from './Nav'
 import Orders from './Orders';
@@ -68,7 +69,7 @@ const HomeComp: React.FC<HomeCompProp> = () => {
                             </div>
                         </div>
                     </div>
-                )) : <div className="big-empty">Big empty</div>}
+                )) : <Error errorMsg="No Content" />}
             </div>
         </div>
     )

@@ -279,6 +279,21 @@ nav .placeholder-to-center {
 .big-empty {
   width: 100%;
   text-align: center;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.big-empty .error-content {
+  padding-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.big-empty .error-message {
+  font-size: 16px;
+  font-weight: 900;
+  padding-top: 10px;
+  color: #ef9f4f;
 }
 
 .home-intro {
@@ -339,7 +354,7 @@ nav .placeholder-to-center {
   padding: 40px;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 576px) {
   .art {
     padding: 0;
   }
@@ -352,14 +367,14 @@ nav .placeholder-to-center {
   overflow: hidden;
 }
 
-@media (min-width: 901px) {
+@media (min-width: 1199px) {
   .art-post {
     width: 20%;
     height: 280px;
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 991px) {
   .art-post {
     width: 25%;
     height: 250px;
@@ -373,7 +388,7 @@ nav .placeholder-to-center {
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 576px) {
   .art-post {
     width: 120px;
     height: 120px;
@@ -419,7 +434,7 @@ nav .placeholder-to-center {
 }
 
 .art-post .img-data-bg:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .art-post .img-data-bg .img-data {
@@ -493,7 +508,6 @@ nav .placeholder-to-center {
 .found-art {
   margin-top: 30px;
   width: 100%;
-  height: 60vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -507,16 +521,31 @@ nav .placeholder-to-center {
   text-align: start;
 }
 
+@media (max-width: 767px) {
+  .found-art {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .found-art .art-image {
   -webkit-transition: 400ms ease-out;
   transition: 400ms ease-out;
   padding: 2px;
-  height: 100%;
+  height: 60vh;
   width: 50%;
   -o-object-fit: contain;
      object-fit: contain;
   -webkit-filter: brightness(80%);
           filter: brightness(80%);
+}
+
+@media (max-width: 767px) {
+  .found-art .art-image {
+    width: 100%;
+  }
 }
 
 .found-art div {
@@ -534,6 +563,13 @@ nav .placeholder-to-center {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+}
+
+@media (max-width: 767px) {
+  .found-art div {
+    width: 100%;
+    padding: 20px;
+  }
 }
 
 .found-art div .art-name {
@@ -558,5 +594,62 @@ nav .placeholder-to-center {
   padding-top: 10px;
   font-size: 16px;
   font-weight: 900;
+}
+
+.found-art div .art-buttons {
+  padding-top: 20px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.found-art div .art-button-space {
+  width: 20px;
+}
+
+@media (max-width: 767px) {
+  .found-art div .art-button-space {
+    width: 10px;
+  }
+}
+
+.found-art div .art-view, .found-art div .art-buy {
+  cursor: pointer;
+  padding: 6px 20px;
+  font-family: 'Product';
+  border-radius: 100px;
+  font-size: 16px;
+  border: 2px solid #ef9f4f;
+}
+
+.found-art div .art-view {
+  background-color: #f9f9f9;
+  color: #ef9f4f;
+}
+
+.found-art div .art-view:hover {
+  background-color: #ef9f4f;
+  color: #f9f9f9;
+}
+
+.found-art div .art-buy {
+  background-color: #ef9f4f;
+  color: #f9f9f9;
+}
+
+.found-art div .art-buy:hover {
+  background-color: #f9f9f9;
+  color: #ef9f4f;
 }
 /*# sourceMappingURL=App.css.map */
