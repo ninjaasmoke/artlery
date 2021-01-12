@@ -3,7 +3,7 @@ import Cookie from 'js-cookie'
 import { motion } from 'framer-motion'
 import { getUser, login, logout, register } from '../api'
 import { useHistory } from 'react-router-dom'
-import { UserType } from '../ContextTypes'
+// import { UserType } from '../ContextTypes'
 
 interface ProfileProps { }
 const Profile: React.FC<ProfileProps> = () => {

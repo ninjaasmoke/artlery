@@ -1,4 +1,3 @@
-import { profile } from 'console';
 import React, { useEffect, useState } from 'react'
 import {
     BrowserRouter as Router,
