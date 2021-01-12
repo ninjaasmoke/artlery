@@ -2,16 +2,16 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { db } = require('../databaseHandler')
 
-const router = express.Router()
-router.use(bodyParser.json())
+const userLoginRouter = express.Router()
+userLoginRouter.use(bodyParser.json())
 
-router.get('/', (req, res, next) => {
+userLoginRouter.get('/', (req, res, next) => {
     res.status = 200
     res.send("Login!")
     next()
 })
 
-router.post('/', (req, res, next) => {
+userLoginRouter.post('/login', (req, res, next) => {
     const username = req.body.username
     console.log("body.username: " + username);
     if (username !== undefined) {
@@ -30,6 +30,7 @@ router.post('/', (req, res, next) => {
                         res.statusCode = 200;
                         res.setHeader('Content-Type', 'application/json');
                         res.json({ username: row.username })
+                        return res.redirect("/")
                     } else {
                         res.statusCode = 404;
                         res.setHeader('Content-Type', 'application/json');
@@ -37,10 +38,8 @@ router.post('/', (req, res, next) => {
                         next()
                     }
                 })
-                next()
             }
         })
-        next()
     } else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
@@ -49,4 +48,4 @@ router.post('/', (req, res, next) => {
     }
 })
 
-module.exports = router
+module.exports = userLoginRouter
