@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Logo from "../resource/logo.svg";
+import User from "../resource/user.png";
 import { Link, useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -34,11 +34,14 @@ const Nav: React.FC<NavProp> = () => {
         <div>
             <nav style={{ backgroundColor: navcolor }}>
                 <div className="placeholder-to-center"></div>
-                <Header imgUri={Logo} />
+                <Header imgUri={"Logo"} />
                 <div className="links">
-                    <NavLink to="/home" label="Home" toggle={() => toggleNav()} />
-                    <NavLink to="/search" label="Search" toggle={() => toggleNav()} />
-                    <NavLink to="/orders" label="Orders" toggle={() => toggleNav()} />
+                    <NavLink to="/home" label="Home" toggle={() => { }} />
+                    <NavLink to="/search" label="Search" toggle={() => { }} />
+                    <NavLink to="/orders" label="Orders" toggle={() => { }} />
+                    <Link to="/profile" >
+                        <img src={User} alt="" />
+                    </Link>
                 </div>
                 <div className={toggle} onClick={() => toggleNav()}>
                     <div className="bar1"></div>
@@ -54,6 +57,7 @@ const Nav: React.FC<NavProp> = () => {
                 <NavLink to="/home" label="Home" toggle={() => toggleNav()} />
                 <NavLink to="/search" label="Search" toggle={() => toggleNav()} />
                 <NavLink to="/orders" label="Orders" toggle={() => toggleNav()} />
+                <NavLink to="/profile" label="Profile" toggle={() => toggleNav()} />
             </motion.div>
         </div>
     )

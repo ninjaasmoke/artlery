@@ -1,5 +1,5 @@
+import { profile } from 'console';
 import React, { useEffect, useState } from 'react'
-
 import {
     BrowserRouter as Router,
     Link,
@@ -9,10 +9,11 @@ import {
 } from 'react-router-dom';
 import { getArt } from '../api';
 import { Art } from '../ContextTypes';
-import Error from './Error';
+import Loading from './Loading';
 
 import Nav from './Nav'
 import Orders from './Orders';
+import Profile from './Profile';
 import Search from './Search';
 import ViewArt from './ViewArt';
 
@@ -20,6 +21,8 @@ interface HomeProps { }
 const Home: React.FC<HomeProps> = () => {
     return (
         <Router>
+            <link rel="preconnect" href="https://fonts.gstatic.com" />
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet"></link>
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link href="https://fonts.googleapis.com/css2?family=Redressed&display=swap" rel="stylesheet" />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -30,6 +33,7 @@ const Home: React.FC<HomeProps> = () => {
                 <Route exact path="/home" component={HomeComp} />
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/orders" component={Orders} />
+                <Route exact path="/profile" component={Profile} />
                 <Redirect to="/home" />
             </Switch>
         </Router>
@@ -76,7 +80,7 @@ const HomeComp: React.FC<HomeCompProp> = () => {
                                 </div>
                             </div>
                         </Link>
-                    )) : <Error errorMsg="No Content" />}
+                    )) : <Loading />}
             </div>
         </div>
     )

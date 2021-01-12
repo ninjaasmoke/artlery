@@ -4,7 +4,7 @@ import { SearchArt } from '../ContextTypes';
 
 interface SearchProp { }
 const Search: React.FC<SearchProp> = () => {
-    const [searched, setSearched] = useState<string>('')
+    // const [searched, setSearched] = useState<string>('')
     const [searchtext, setSearchtext] = useState<string>('')
     const [foundArt, setFoundArt] = useState<SearchArt>()
 
@@ -17,10 +17,8 @@ const Search: React.FC<SearchProp> = () => {
         if (searchText.length !== 0) {
             console.log("Searching");
             search(searchtext).then((data) => {
-                setSearched(searchText)
+                // setSearched(searchText)
                 setFoundArt(data)
-                console.log(foundArt);
-
             })
         } else {
             console.log(searchText);
@@ -60,8 +58,8 @@ const Search: React.FC<SearchProp> = () => {
                             <div className="art-rating">Rating: {foundArt.rating}</div>
                             <div className="art-price">Price: ${foundArt.price}</div>
                             <div className="art-buttons">
-                                <button className="art-view">View</button>
-                                <span className="art-button-space"></span>
+                                {/* <button className="art-view">View</button>
+                                <span className="art-button-space"></span> */}
                                 <button className="art-buy">Buy Now</button>
                             </div>
                         </div>

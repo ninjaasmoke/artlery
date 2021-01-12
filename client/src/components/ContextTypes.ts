@@ -13,3 +13,10 @@ export interface SearchArt {
     rating: number,
     comment: string
 }
+
+export type UserType = {
+    email: string;
+    firstname: string;
+    username: string;
+    usertype: number;
+}
