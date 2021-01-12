@@ -19,7 +19,7 @@ userLoginRouter.post('/login', (req, res, next) => {
             if (err) {
                 res.statusCode = 404;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({ username: null })
+                res.json({ "error": "User name not found" })
                 next()
             } else {
                 const password = req.body.password

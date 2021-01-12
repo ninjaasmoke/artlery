@@ -52,23 +52,21 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 res.statusCode = 404;
                 res.setHeader('Content-Type', 'application/json');
-                res.json({ username: null })
-                next()
+                return res.json({ "error": "Username not found" })
             } else {
                 const password = req.body.password
                 rows.forEach((row) => {
                     if (row.password === password) {
+                        res.clearCookie("username")
                         console.log('Verified user: ' + row.username + '!');
                         res.cookie("username", username)
                         res.statusCode = 200;
                         res.setHeader('Content-Type', 'application/json');
-                        res.json({ username: row.username })
                         return res.redirect("/")
                     } else {
                         res.statusCode = 404;
                         res.setHeader('Content-Type', 'application/json');
-                        res.json({ "error": "wrong password" })
-                        next()
+                        return res.json({ "error": "wrong password" })
                     }
                 })
             }
@@ -76,9 +74,15 @@ router.post('/login', (req, res, next) => {
     } else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
-        res.json({ username: null })
-        next()
+        return res.json({ username: null })
     }
+})
+
+router.get('/logout', (req, res, next) => {
+    console.log(req.cookies);
+    res.cookie("username", null)
+    res.status = 200
+    return res.redirect("/")
 })
 
 module.exports = router

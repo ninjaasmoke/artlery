@@ -22,14 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  if (req.cookies.cookieName === undefined) {
-    res.cookie("username", null)
-  }
-  next()
-})
-
-
 app.use('/api', apiRoute)
 app.use('/users', userRouter)
 
