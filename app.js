@@ -27,16 +27,14 @@ app.use('/users', userRouter)
 
 // app.use('/', indexRouter)
 app.use('/', express.static(path.resolve(`${__dirname}/client/build/`)));
-app.get('/*', (req, res) => res.sendFile(path.resolve(`${__dirname}/client/build/index.html`)))
+app.get('/*', (req, res) => {
+  return res.sendFile(path.resolve(`${__dirname}/client/build/index.html`))
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
-// database.createTable('create table user (username constchar2(20) not null,firstname constchar2(20), email constchar2(20), password constchar2(20) not null, usertype int(1) not null, primary key(username, password))')
-// database.insertValues('insert into user (username, firstname, email, password, usertype) values (' / "Nithin Sai", "Nithin Sai", "nithins674@gmail.com", "123456", 0 / ')', [], errorLog)
-// database.queryValues('select username from user', [])
 
 // error handler
 app.use((err, req, res, next) => {

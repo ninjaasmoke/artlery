@@ -7,13 +7,13 @@ router.get('/gallery', (req, res, next) => {
     if (galleryData) {
         res.statusCode = 200
         res.json(galleryData)
-        res.end
+        return
         console.log("Successfully sent data");
     } else {
         // sqltoJSON()
         res.statusCode = 501
         res.send("Some error! Try again")
-        res.end
+        return
         console.error("Some error try again");
     }
 })
@@ -48,33 +48,35 @@ router.post('/login', (req, res, next) => {
     const username = req.body.username
     console.log("body.username: " + username);
     if (username !== undefined) {
-        db.all('select * from user where username=?', [username], (err, rows) => {
+        db.get('select * from user where username=?', [username], (err, row) => {
             if (err) {
                 res.statusCode = 404;
-                res.setHeader('Content-Type', 'application/json');
-                return res.json({ "error": "Username not found" })
+                res.setHeader('Content-Type', 'application/json')
+                console.error(err);
+                res.json({ "error": "Username not found" });
+                return;
             } else {
-                const password = req.body.password
-                rows.forEach((row) => {
-                    if (row.password === password) {
-                        res.clearCookie("username")
-                        console.log('Verified user: ' + row.username + '!');
-                        res.cookie("username", username)
-                        res.statusCode = 200;
-                        res.setHeader('Content-Type', 'application/json');
-                        return res.redirect("/")
-                    } else {
-                        res.statusCode = 404;
-                        res.setHeader('Content-Type', 'application/json');
-                        return res.json({ "error": "wrong password" })
-                    }
-                })
+                const password = req.body.password;
+                console.log(password);
+                if (row.password === password) {
+                    res.clearCookie("username")
+                    console.log('Verified user: ' + row.username + '!');
+                    res.cookie("username", username)
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    return res.redirect("/")
+                } else {
+                    res.statusCode = 404;
+                    res.setHeader('Content-Type', 'application/json');
+                    return res.json({ "error": "wrong password" })
+                }
             }
         })
     } else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
-        return res.json({ username: null })
+        console.error("No user name");
+        return res.json({ "error": "no user name" })
     }
 })
 
@@ -84,5 +86,44 @@ router.get('/logout', (req, res, next) => {
     res.status = 200
     return res.redirect("/")
 })
+
+router.post('/register', (req, res, next) => {
+    const sql = req.body.sql;
+    const username = req.body.username;
+    if (sql !== undefined && username !== undefined) {
+        console.log(sql);
+        db.run(sql, [], (err) => {
+            if (err) {
+                res.status = 400;
+                res.setHeader('Content-Type', 'application/json');
+                console.error(err);
+                return res.json({
+                    "error": "invalid sql or username missing in body",
+                    "err": err
+                })
+            } else {
+                db.get('select * from user where username=?', [username], (err, rows) => {
+                    if (err) {
+                        res.status = 400;
+                        res.setHeader('Content-Type', 'application/json');
+                        return res.json({
+                            "error": err
+                        })
+                    } else {
+                        res.clearCookie("username")
+                        console.log('Verified user: ' + username + '!');
+                        res.cookie("username", username)
+                        res.statusCode = 200;
+                        res.setHeader('Content-Type', 'application/json');
+                        return res.redirect("/")
+                    }
+                })
+            }
+        })
+    }
+})
+
+
+
 
 module.exports = router
