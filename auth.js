@@ -1,5 +1,4 @@
 const { queryAllValues } = require('./databaseHandler')
-const cookieParser = require('cookie-parser')
 
 module.exports = {
 

@@ -8,9 +8,10 @@ const userRouter = require('./routes/users')
 const indexRouter = require('./routes/index')
 const { verifyuser } = require('./auth')
 const database = require('./databaseHandler')
+const cors = require('cors');
+const { read } = require('fs');
 
 const app = express();
-const cors = require('cors')
 
 app.set('client', path.join(__dirname, 'client'))
 
@@ -20,6 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  if (req.cookies.cookieName == undefined) {
+    res.cookie("username", null)
+  }
+  next()
+})
 
 
 app.use('/api', apiRoute)

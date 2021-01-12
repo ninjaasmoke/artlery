@@ -1,5 +1,5 @@
 var express = require('express')
-const { sqltoJSON, db } = require('../../databaseHandler')
+const { db } = require('../../databaseHandler')
 var router = express.Router()
 
 router.get('/gallery', (req, res, next) => {
