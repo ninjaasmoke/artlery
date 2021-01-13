@@ -48,7 +48,6 @@
     ]
   },
   "devDependencies": {
-    "@types/js-cookie": "^2.2.6",
-    "@types/react-lazy-load-image-component": "^1.5.1"
+    "@types/js-cookie": "^2.2.6"
   }
 }
