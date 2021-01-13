@@ -12,7 +12,6 @@
   "private": true,
   "scripts": {
     "build": "cd client && npm run build && cd ../",
-    "install": "cd client && npm install && cd ../",
     "start": "node ./bin/www"
   },
   "dependencies": {

@@ -39,7 +39,7 @@ export async function getUser(username: string) {
 }
 
 export async function register(username: string, usernameName: string, email: string, password: string, usertype: number,) {
-    const sql = <string>`insert into user (username, firstname, email, password, usertype) values ("${username}", "${usernameName}", "${email}", "${password}", ${usertype})`;
+    const sql = `insert into user (username, firstname, email, password, usertype) values ("${username}", "${usernameName}", "${email}", "${password}", ${usertype})` as string;
     try {
         const res = await axios.post(`${endpoint}/api/register`, { "sql": sql, "username": username })
         console.log(res);
