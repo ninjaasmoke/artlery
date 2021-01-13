@@ -18,6 +18,12 @@ import ViewArt from './ViewArt';
 
 interface HomeProps { }
 const Home: React.FC<HomeProps> = () => {
+    useEffect(() => {
+        getArt().then((data) => {
+            setArt(data)
+        })
+    }, [])
+    const [art, setArt] = useState([]);
     return (
         <Router>
             <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -29,7 +35,9 @@ const Home: React.FC<HomeProps> = () => {
             <Nav />
             <Switch>
                 <Route path="/view/:showArt" component={ViewArt} />
-                <Route exact path="/home" component={HomeComp} />
+                <Route exact path="/home">
+                    <HomeComp art={art} />
+                </Route>
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/orders" component={Orders} />
                 <Route exact path="/profile" component={Profile} />
@@ -39,14 +47,11 @@ const Home: React.FC<HomeProps> = () => {
     )
 }
 
-interface HomeCompProp { }
-const HomeComp: React.FC<HomeCompProp> = () => {
-    useEffect(() => {
-        getArt().then((data) => {
-            setArt(data)
-        })
-    }, [])
-    const [art, setArt] = useState([])
+interface HomeCompProp {
+    art: Art[]
+}
+const HomeComp: React.FC<HomeCompProp> = ({ art }) => {
+
     return (
         <div className="content-body">
             <div className="nav-space"></div>
