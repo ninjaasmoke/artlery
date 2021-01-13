@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Cookie from 'js-cookie'
+import Cookies from 'js-cookie'
 import { motion } from 'framer-motion'
 import { getUser, login, logout, register } from '../api'
 import { useHistory } from 'react-router-dom'
@@ -57,7 +57,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 console.log(res);
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
-                        Cookie.set("username", res?.data.username)
+                        Cookies.set("username", res?.data.username)
                         history.push("/home");
                         setLoading("Successful!")
                     } else if (res.data.error != null) {
@@ -79,7 +79,7 @@ const Profile: React.FC<ProfileProps> = () => {
             register(usernameText, usernameName, useremailText, passwordText, userType).then((res) => {
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
-                        Cookie.set("username", res?.data.username)
+                        Cookies.set("username", res?.data.username)
                         history.push("/home");
                         setRegLoading("Registered!")
                     } else if (res.data.error != null) {
@@ -98,7 +98,7 @@ const Profile: React.FC<ProfileProps> = () => {
         console.log("Trying logout");
         logout().then((res) => {
             if (res?.status === 200) {
-                Cookie.remove("username")
+                Cookies.remove("username")
                 history.push("/home");
                 console.log("logged out");
             } else {
@@ -108,7 +108,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
     }
     useEffect(() => {
-        const username = Cookie.get('username');
+        const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
         getUser(username !== undefined ? username : "").then((res) => { })
         console.log(username);
