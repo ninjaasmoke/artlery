@@ -80,7 +80,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
                         Cookie.set("username", res?.data.username)
-                        history.push("/profile");
+                        history.push("/home");
                         setRegLoading("Registered!")
                     } else if (res.data.error != null) {
                         setErrorMessage(res.data.error.toString())
@@ -155,8 +155,8 @@ const Profile: React.FC<ProfileProps> = () => {
                                     <hr />
                                     <span>I am here to</span>
                                     <div className="user-type">
-                                        <button className={userType == 1 ? "selected" : ""} onClick={() => setUserType(1)}>Buy Art</button>
-                                        <button className={userType == 2 ? "selected" : ""} onClick={() => setUserType(2)}>Sell Art</button>
+                                        <button className={userType === 2 ? "selected" : ""} onClick={() => setUserType(1)}>Buy Art</button>
+                                        <button className={userType === 1 ? "selected" : ""} onClick={() => setUserType(2)}>Sell Art</button>
                                     </div>
                                     <span className="user-detail">Name</span>
                                     <input type="text" name="user-name" id="user-detail-name" onChange={() => handleRegUsernameName()} />
