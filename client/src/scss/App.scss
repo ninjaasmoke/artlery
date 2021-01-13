@@ -1,5 +1,5 @@
 $accentColor: #242428;
-$inputBorderColor: #38383d;
+$inputBorderColor: #48484d;
 $secColor: #f0f0f0;
 // $accent3Color: #ee2763;
 $accent3Color: #e7a11f;
@@ -429,7 +429,7 @@ nav {
 
     .art-image {
         transition: 400ms ease-out;
-        padding: 2px;
+        padding: 4px;
         height: 60vh;
         width: 50%;
         object-fit: contain;
@@ -556,7 +556,8 @@ nav {
             left: 0;
             height: 100%;
             width: 100%;
-            background-color: rgba($color: #000000, $alpha: 0.5);
+            background-color: rgba($color: #000, $alpha: 0.2);
+            backdrop-filter: blur(12px);
             @media (max-width: 767px) {
                 display: none;
             }
@@ -684,30 +685,54 @@ nav {
     }
 
     .profile-card {
-        width: 75%;
-        height: 500px;
+        min-width: 500px;
+        min-height: 300px;
         border-radius: 12px;
-        background-image: linear-gradient(120deg, $accent2Color, $accent3Color);
+        // background-image: linear-gradient(120deg, $accent2Color, $accent3Color);
+        border: 1px solid $accent3Color;
         position: relative;
 
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: center;
+        justify-content: space-around;
 
         padding: 20px;
-        color: $primColor;
 
-        h1 {
-            font-size: 40px;
+        .user-heading {
+            h1 {
+                font-size: 48px;
+                color: $accentColor;
+            }
+            h2 {
+                margin-top: -8px;
+            }
         }
 
+        .user-detail {
+            span {
+                font-weight: 700;
+            }
+
+            h3 {
+                font-size: 14px;
+                // padding-left: 8px;
+                color: $inputBorderColor;
+            }
+        }
+
+        .user-buttons {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
         button {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
             border: none;
             outline: none;
+            // margin-top: 32px;
             background-color: $secColor;
             padding: 8px 20px;
             border-radius: 20px;
@@ -715,11 +740,21 @@ nav {
             font-family: 'Poppins';
             font-size: 15px;
             font-weight: 700;
+            transition-duration: 300ms;
+            &:hover{
+                background-color: $primColor;
+                color: $accent3Color;
+            }
+        }
+
+        .logout {
+            color: $errorMes;
             &:hover{
                 background-color: $primColor;
                 color: $errorMes;
             }
         }
+
 
         @media (max-width: 767px) {
             width: 100%;
@@ -815,6 +850,7 @@ nav {
             padding: 20px;
             font-size: 14px;
             text-align: center;
+            width: 250px;
     
             span {
                 font-size: 14px;
@@ -823,6 +859,23 @@ nav {
                 cursor: pointer;
                 &:hover {
                     text-decoration: underline;
+                }
+            }
+
+            h3 {
+                width: 100%;
+                font-size: 18px;
+                font-weight: 500;
+                text-align: start;
+            }
+
+            ul {
+                padding-top: 12px;
+                li {
+                    padding-top: 8px;
+                    text-align: start;
+                    color: $accent2Color;
+                    font-weight: 700;
                 }
             }
 

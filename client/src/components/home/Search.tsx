@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { search } from '../api';
-import { SearchArt } from '../ContextTypes';
+import { Art } from '../ContextTypes';
 
 interface SearchProp { }
 const Search: React.FC<SearchProp> = () => {
     // const [searched, setSearched] = useState<string>('')
     const [searchtext, setSearchtext] = useState<string>('')
-    const [foundArt, setFoundArt] = useState<SearchArt>()
+    const [foundArt, setFoundArt] = useState<Art>()
 
     const handleChange = (searchText: string) => {
         var text = (document.getElementById('search-text') as HTMLInputElement).value
@@ -51,7 +51,7 @@ const Search: React.FC<SearchProp> = () => {
             {
                 foundArt ?
                     <div className="found-art">
-                        <img alt={foundArt.name} src={foundArt.url} className="art-image" />
+                        <img alt={foundArt.name} src={foundArt.imageurl} className="art-image" />
                         <div>
                             <div className="art-name"> {foundArt.name}</div>
                             <div className="art-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem sed tenetur illo, magnam accusamus tempora doloremque modi, odio, earum sunt quas quisquam quae nesciunt ducimus ullam eligendi quos cupiditate.</div>

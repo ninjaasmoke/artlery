@@ -557,7 +557,7 @@ nav .placeholder-to-center {
 .found-art .art-image {
   -webkit-transition: 400ms ease-out;
   transition: 400ms ease-out;
-  padding: 2px;
+  padding: 4px;
   height: 60vh;
   width: 50%;
   -o-object-fit: contain;
@@ -726,7 +726,9 @@ nav .placeholder-to-center {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
 }
 
 @media (max-width: 767px) {
@@ -879,10 +881,10 @@ nav .placeholder-to-center {
 }
 
 .profile-card-holder .profile-card {
-  width: 75%;
-  height: 500px;
+  min-width: 500px;
+  min-height: 300px;
   border-radius: 12px;
-  background-image: linear-gradient(120deg, #ef9f4f, #e7a11f);
+  border: 1px solid #e7a11f;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -894,21 +896,45 @@ nav .placeholder-to-center {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   padding: 20px;
-  color: #f9f9f9;
 }
 
-.profile-card-holder .profile-card h1 {
-  font-size: 40px;
+.profile-card-holder .profile-card .user-heading h1 {
+  font-size: 48px;
+  color: #242428;
+}
+
+.profile-card-holder .profile-card .user-heading h2 {
+  margin-top: -8px;
+}
+
+.profile-card-holder .profile-card .user-detail span {
+  font-weight: 700;
+}
+
+.profile-card-holder .profile-card .user-detail h3 {
+  font-size: 14px;
+  color: #48484d;
+}
+
+.profile-card-holder .profile-card .user-buttons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 20px;
 }
 
 .profile-card-holder .profile-card button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
   border: none;
   outline: none;
   background-color: #f0f0f0;
@@ -918,9 +944,20 @@ nav .placeholder-to-center {
   font-family: 'Poppins';
   font-size: 15px;
   font-weight: 700;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
 }
 
 .profile-card-holder .profile-card button:hover {
+  background-color: #f9f9f9;
+  color: #e7a11f;
+}
+
+.profile-card-holder .profile-card .logout {
+  color: #ff2020;
+}
+
+.profile-card-holder .profile-card .logout:hover {
   background-color: #f9f9f9;
   color: #ff2020;
 }
@@ -932,7 +969,7 @@ nav .placeholder-to-center {
 }
 
 .profile-card-holder .register-user .profile-register {
-  border: 0.1px solid #38383d;
+  border: 0.1px solid #48484d;
   border-radius: 4px;
   padding: 20px;
   min-width: 300px;
@@ -1033,6 +1070,7 @@ nav .placeholder-to-center {
   padding: 20px;
   font-size: 14px;
   text-align: center;
+  width: 250px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1057,6 +1095,24 @@ nav .placeholder-to-center {
 
 .profile-card-holder .register-user .register span:hover {
   text-decoration: underline;
+}
+
+.profile-card-holder .register-user .register h3 {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: start;
+}
+
+.profile-card-holder .register-user .register ul {
+  padding-top: 12px;
+}
+
+.profile-card-holder .register-user .register ul li {
+  padding-top: 8px;
+  text-align: start;
+  color: #ef9f4f;
+  font-weight: 700;
 }
 
 @media (min-width: 768px) {

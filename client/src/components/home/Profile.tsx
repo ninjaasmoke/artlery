@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { getUser, login, logout, register } from '../api'
 import { useHistory } from 'react-router-dom'
+import { UserType } from '../ContextTypes'
 // import { UserType } from '../ContextTypes'
 const Cookies = require('js-cookie')
 
@@ -12,13 +13,14 @@ const Profile: React.FC<ProfileProps> = () => {
     const [loading, setLoading] = useState<string>("Log In")
     const [loginState, setLoginState] = useState<boolean>(true)
     const [regLoading, setRegLoading] = useState<string>("Register")
+    const [userDet, setUserDet] = useState<UserType>();
     const history = useHistory()
 
 
     const [usernameText, setUsernameText] = useState<string>('')
     const [passwordText, setPasswordText] = useState<string>('')
     const [useremailText, setUseremailText] = useState<string>('')
-    const [userType, setUserType] = useState<number>(1)
+    const [userType, setUserType] = useState<number>(2)
     const [usernameName, setUsernameName] = useState<string>('')
 
     const handleText = () => {
@@ -58,7 +60,8 @@ const Profile: React.FC<ProfileProps> = () => {
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
                         Cookies.set("username", res?.data.username)
-                        history.push("/home");
+                        // history.push("/home");
+                        window.location.reload()
                         setLoading("Successful!")
                     } else if (res.data.error != null) {
                         setErrorMessage(res.data.error.toString())
@@ -80,7 +83,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
                         Cookies.set("username", res?.data.username)
-                        history.push("/home");
+                        window.location.reload()
                         setRegLoading("Registered!")
                     } else if (res.data.error != null) {
                         setErrorMessage(res.data.error.toString())
@@ -110,7 +113,9 @@ const Profile: React.FC<ProfileProps> = () => {
     useEffect(() => {
         const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
-        getUser(username !== undefined ? username : "").then((res) => { })
+        getUser(username !== undefined ? username : "").then((res) => {
+            setUserDet(res?.data);
+        })
         console.log(username);
     }, [])
     return (
@@ -118,8 +123,18 @@ const Profile: React.FC<ProfileProps> = () => {
             <div className="profile-card-holder">
                 {username !== "null"
                     ? <div className="profile-card">
-                        <h1>{username}</h1>
-                        <button onClick={() => handleLogout()} >Logout</button>
+                        <div className="user-heading">
+                            <h1>{username}</h1>
+                            <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
+                        </div>
+                        <div className="user-detail">
+                            <h3>{userDet?.firstname}</h3>
+                            <h3>{userDet?.email}</h3>
+                        </div>
+                        <div className="user-buttons">
+                            <button onClick={() => { }} >View your {userDet?.usertype === 1 ? "Listings" : "Orders"}</button>
+                            <button onClick={() => handleLogout()} className="logout">Logout</button>
+                        </div>
                     </div>
                     : loginState
                         ? <motion.div
@@ -149,14 +164,23 @@ const Profile: React.FC<ProfileProps> = () => {
                             transition={{ ease: "easeOut", duration: .2 }}
                         >
                             <div className="register-user">
+                                <div className="register">
+                                    <h3>Why Register?</h3>
+                                    <ul>
+                                        <li>Get unlimited free deliveries.</li>
+                                        <li>Place orders on you favourite Arts.</li>
+                                        <li>Login anywhere.</li>
+                                    </ul>
+                                </div>
+                                <div className="place"></div>
                                 <div className="profile-register">
                                     <span className="register-head">Register</span>
                                     <span className="register-message">Please fill in the following details about yourself.</span>
                                     <hr />
                                     <span>I am here to</span>
                                     <div className="user-type">
-                                        <button className={userType === 2 ? "selected" : ""} onClick={() => setUserType(1)}>Buy Art</button>
-                                        <button className={userType === 1 ? "selected" : ""} onClick={() => setUserType(2)}>Sell Art</button>
+                                        <button className={userType === 2 ? "selected" : ""} onClick={() => setUserType(2)}>Buy Art</button>
+                                        <button className={userType === 1 ? "selected" : ""} onClick={() => setUserType(1)}>Sell Art</button>
                                     </div>
                                     <span className="user-detail">Name</span>
                                     <input type="text" name="user-name" id="user-detail-name" onChange={() => handleRegUsernameName()} />

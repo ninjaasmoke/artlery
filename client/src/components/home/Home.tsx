@@ -16,9 +16,14 @@ import Profile from './Profile';
 import Search from './Search';
 import ViewArt from './ViewArt';
 
+const Cookies = require('js-cookie')
+
 interface HomeProps { }
 const Home: React.FC<HomeProps> = () => {
+    const [username, setUsername] = useState<string>('');
     useEffect(() => {
+        const username = Cookies.get('username');
+        setUsername(username === undefined ? "null" : username)
         getArt().then((data) => {
             setArt(data)
         })
@@ -36,7 +41,7 @@ const Home: React.FC<HomeProps> = () => {
             <Switch>
                 <Route path="/view/:showArt" component={ViewArt} />
                 <Route exact path="/home">
-                    <HomeComp art={art} />
+                    <HomeComp art={art} username={username} />
                 </Route>
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/orders" component={Orders} />
@@ -48,9 +53,10 @@ const Home: React.FC<HomeProps> = () => {
 }
 
 interface HomeCompProp {
-    art: Art[]
+    art: Art[],
+    username: string
 }
-const HomeComp: React.FC<HomeCompProp> = ({ art }) => {
+const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
 
     return (
         <div className="content-body">
@@ -58,7 +64,7 @@ const HomeComp: React.FC<HomeCompProp> = ({ art }) => {
             <div className="home-intro">
                 <div>
                     <div className="home-intro-heading">
-                        Hey There! Welcome to the art gallery
+                        Hey {username.length !== 0 ? username : "There"}! Welcome to the art gallery
                     </div>
                     <div className="home-intro-body">
                         A collection of awesome artworks at the reach of your fingertips.
@@ -67,7 +73,6 @@ const HomeComp: React.FC<HomeCompProp> = ({ art }) => {
                 <div className="home-intro-instruction">
                     Choose an artwork that you love!
                 </div>
-
             </div>
             <div className="art">
                 {art.length ?
