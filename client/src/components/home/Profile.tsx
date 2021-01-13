@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
+const Cookies = require('js-cookie')
 import { motion } from 'framer-motion'
 import { getUser, login, logout, register } from '../api'
 import { useHistory } from 'react-router-dom'
