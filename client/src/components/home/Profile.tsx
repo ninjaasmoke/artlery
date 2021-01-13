@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-const Cookies = require('js-cookie')
 import { motion } from 'framer-motion'
 import { getUser, login, logout, register } from '../api'
 import { useHistory } from 'react-router-dom'
 // import { UserType } from '../ContextTypes'
+const Cookies = require('js-cookie')
 
 interface ProfileProps { }
 const Profile: React.FC<ProfileProps> = () => {
