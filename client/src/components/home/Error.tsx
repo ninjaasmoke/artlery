@@ -3,7 +3,7 @@ import React from 'react'
 interface ErrorProps {
     errorMsg: string
 }
-const Error: React.FC<ErrorProps> = ({ errorMsg }) => {
+const ErrorBig: React.FC<ErrorProps> = ({ errorMsg }) => {
 
     return (
         <div className="big-empty">
@@ -18,4 +18,4 @@ const Error: React.FC<ErrorProps> = ({ errorMsg }) => {
     )
 }
 
-export default Error
+export default ErrorBig

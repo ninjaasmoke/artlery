@@ -208,7 +208,10 @@ router.post('/placeorder', (req, res, next) => {
     const booked = req.body.booked;
     const due = req.body.due;
     if (username !== undefined && artname !== undefined && address !== undefined && booked !== undefined && due != undefined) {
-        db.run(`INSERT INTO orders (username, artname, address, booked, due) VALUES ("${username}", "${artname}", "${address}", "${booked}", "${due}")`,
+        console.log("Buying: " + artname);
+        const sql = `INSERT INTO orders (username, artname, address, booked, due) VALUES ("${username}", "${artname}", "${address}", "${booked}", "${due}")`;
+        console.log(sql);
+        db.run(sql,
             [], (err) => {
                 if (err) {
                     console.error(err);
@@ -227,7 +230,7 @@ router.post('/placeorder', (req, res, next) => {
 router.post('/listorders', (req, res, next) => {
     const username = req.body.username;
     if (username !== undefined) {
-        db.all('select * from orders where username=?', [username], (err, rows) => {
+        db.all(`select * from orders where username="${username}"`, [], (err, rows) => {
             if (err) {
                 console.error(err);
                 res.status = 200;

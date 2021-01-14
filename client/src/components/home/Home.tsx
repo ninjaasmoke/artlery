@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react'
 import {
     BrowserRouter as Router,
@@ -8,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { getArt } from '../api';
 import { Art } from '../ContextTypes';
+import BuyArt from './BuyArt';
 import Loading from './Loading';
 
 import Nav from './Nav'
@@ -40,6 +42,7 @@ const Home: React.FC<HomeProps> = () => {
             <Nav />
             <Switch>
                 <Route path="/view/:showArt" component={ViewArt} />
+                <Route path="/buyart/:art" component={BuyArt} />
                 <Route exact path="/home">
                     <HomeComp art={art} username={username} />
                 </Route>
@@ -61,10 +64,13 @@ const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
     return (
         <div className="content-body">
             <div className="nav-space"></div>
-            <div className="home-intro">
+            <motion.div className="home-intro"
+                initial={{ y: '-1vh', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: .5 }}>
                 <div>
                     <div className="home-intro-heading">
-                        Hey {username.length !== 0 ? username : "There"}! Welcome to the art gallery
+                        Hey {username.length !== 0 && username !== "null" ? username : "There"}! Welcome to the art gallery
                     </div>
                     <div className="home-intro-body">
                         A collection of awesome artworks at the reach of your fingertips.
@@ -73,7 +79,7 @@ const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
                 <div className="home-intro-instruction">
                     Choose an artwork that you love!
                 </div>
-            </div>
+            </motion.div>
             <div className="art">
                 {art.length ?
                     art.map((artVal: Art, index: number) => (

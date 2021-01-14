@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { getUser, login, logout, register } from '../api'
-import { useHistory } from 'react-router-dom'
-import { UserType } from '../ContextTypes'
+import { getOrderList, getUser, login, logout, register } from '../api'
+// import {  useHistory } from 'react-router-dom'
+import { Orders, UserType } from '../ContextTypes'
+import FadeInTop from './animation/FadeInAnim'
+import ErrorBig from './Error'
 // import { UserType } from '../ContextTypes'
 const Cookies = require('js-cookie')
 
@@ -14,7 +16,8 @@ const Profile: React.FC<ProfileProps> = () => {
     const [loginState, setLoginState] = useState<boolean>(true)
     const [regLoading, setRegLoading] = useState<string>("Register")
     const [userDet, setUserDet] = useState<UserType>();
-    const history = useHistory()
+    const [ordersList, setOrdersList] = useState([])
+    // const history = useHistory()
 
 
     const [usernameText, setUsernameText] = useState<string>('')
@@ -59,7 +62,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 console.log(res);
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
-                        Cookies.set("username", res?.data.username)
+                        Cookies.set("username", res?.data.username, { expires: 7 })
                         // history.push("/home");
                         window.location.reload()
                         setLoading("Successful!")
@@ -82,7 +85,7 @@ const Profile: React.FC<ProfileProps> = () => {
             register(usernameText, usernameName, useremailText, passwordText, userType).then((res) => {
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
-                        Cookies.set("username", res?.data.username)
+                        Cookies.set("username", res?.data.username, { expires: 7 })
                         window.location.reload()
                         setRegLoading("Registered!")
                     } else if (res.data.error != null) {
@@ -101,8 +104,8 @@ const Profile: React.FC<ProfileProps> = () => {
         console.log("Trying logout");
         logout().then((res) => {
             if (res?.status === 200) {
-                Cookies.remove("username")
-                history.push("/home");
+                Cookies.remove("username");
+                window.location.replace('/home')
                 console.log("logged out");
             } else {
                 setErrorMessage("Unable to logout :(")
@@ -115,32 +118,23 @@ const Profile: React.FC<ProfileProps> = () => {
         setUsername(username === undefined ? "null" : username)
         getUser(username !== undefined ? username : "").then((res) => {
             setUserDet(res?.data);
+            getOrderList(res?.data.username).then((data) => {
+                setOrdersList(data)
+            })
         })
         console.log(username);
     }, [])
     return (
         <div className="content-body">
+            <div className="nav-space"></div>
             <div className="profile-card-holder">
                 {username !== "null"
-                    ? <div className="profile-card">
-                        <div className="user-heading">
-                            <h1>{username}</h1>
-                            <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
-                        </div>
-                        <div className="user-detail">
-                            <h3>{userDet?.firstname}</h3>
-                            <h3>{userDet?.email}</h3>
-                        </div>
-                        <div className="user-buttons">
-                            <button onClick={() => { }} >View your {userDet?.usertype === 1 ? "Listings" : "Orders"}</button>
-                            <button onClick={() => handleLogout()} className="logout">Logout</button>
-                        </div>
-                    </div>
+                    ? <UserDetail username={username} userDet={userDet} handleLogout={() => handleLogout()} />
                     : loginState
                         ? <motion.div
-                            initial={{ scale: .1 }}
-                            animate={{ scale: 1 }}
-                            transition={{ ease: "easeOut", duration: .2 }}
+                            initial={{ y: '-10vh', opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ ease: "easeOut", duration: .4 }}
                             className="profile-login">
                             <span className="login">Please Login</span>
                             <div className="login-form">
@@ -158,13 +152,9 @@ const Profile: React.FC<ProfileProps> = () => {
                                 }}>Create Account</span>
                             </div>
                         </motion.div>
-                        : <motion.div
-                            initial={{ scale: .1 }}
-                            animate={{ scale: 1 }}
-                            transition={{ ease: "easeOut", duration: .2 }}
-                        >
+                        : <FadeInTop children={
                             <div className="register-user">
-                                <div className="register">
+                                <div className="register hide-mobile">
                                     <h3>Why Register?</h3>
                                     <ul>
                                         <li>Get unlimited free deliveries.</li>
@@ -200,12 +190,66 @@ const Profile: React.FC<ProfileProps> = () => {
                                     }}>Login</span>
                                 </div>
                             </div>
-                        </motion.div>
+                        } classname="" />
                 }
+                {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
                 {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
-
             </div>
+            {/* {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />} */}
         </div>
+    )
+}
+
+interface UserDetailProps {
+    username: string,
+    userDet: UserType | undefined,
+    handleLogout: () => void
+}
+const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout }) => {
+    return (
+        <FadeInTop classname="" children={
+            <div
+                className="profile-card">
+                <div className="user-heading">
+                    <h1>{username}</h1>
+                    <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
+                </div>
+                <div className="user-detail">
+                    <h3>{userDet?.firstname}</h3>
+                    <h3>{userDet?.email}</h3>
+                </div>
+                <div className="user-buttons">
+                    {/* <Link to="/orders">View your {userDet?.usertype !== 1 ? "Orders" : "Lisitings"}</Link> */}
+                    <button onClick={() => handleLogout()} className="logout">Logout</button>
+                </div>
+            </div>
+        } />
+    )
+}
+
+interface OrderProp {
+    ordersList: Orders[],
+}
+const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
+    return (
+        <motion.div
+            initial={{ scaleY: .1 }}
+            animate={{ scaleY: 1 }}
+            transition={{ ease: "easeOut", duration: .2 }}
+            className="orders-list"
+        >
+            <h2>Orders</h2>
+            {ordersList !== undefined && ordersList !== null ?
+                ordersList?.map((order, index) => (
+                    <div key={index}>
+                        <h3>{order.artname}</h3>
+                        <span>Delivery at: {order.address}</span>
+                        <span>Due: {order.due}</span>
+                        <span>Booked: {order.booked}</span>
+                    </div>
+                ))
+                : <ErrorBig errorMsg="No Orders Yet" />}
+        </motion.div>
     )
 }
 

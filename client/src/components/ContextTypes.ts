@@ -6,12 +6,12 @@ export interface Art {
     comment: string
 }
 
-export interface SearchArt {
-    name: string,
-    url: string,
-    price: number,
-    rating: number,
-    comment: string
+export interface Orders {
+    username: string;
+    artname: string;
+    address: string;
+    booked: string;
+    due: string;
 }
 
 export type UserType = {

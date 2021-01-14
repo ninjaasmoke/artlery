@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Orders } from './ContextTypes';
 
 const endpoint =
     window.location.origin === 'http://localhost:3000'
@@ -8,8 +9,7 @@ const endpoint =
 export async function getArt() {
     try {
         const { data } = await axios.get(`${endpoint}/api/gallery`)
-        console.log(data);
-
+        // console.log(data);
         return data
     } catch (err) {
         console.error(err);
@@ -30,11 +30,32 @@ export async function search(searchText: string) {
 export async function getUser(username: string) {
     try {
         const res = await axios.post(`${endpoint}/api/user`, { username: username })
-        console.log(res);
+        // console.log(res);
         return res
     } catch (error) {
         console.error(error);
 
+    }
+}
+
+export async function getOrderList(username: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/listorders`, { username: username })
+        return res.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function placeOrder(order: Orders) {
+    try {
+        const res = await axios.post(`${endpoint}/api/placeorder`,
+            { username: order.username, artname: order.artname, address: order.address, booked: order.booked, due: order.due })
+        console.log(res.data);
+
+        return res.data
+    } catch (error) {
+        console.error(error);
     }
 }
 

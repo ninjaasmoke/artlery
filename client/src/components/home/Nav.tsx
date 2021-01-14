@@ -8,16 +8,16 @@ const Nav: React.FC<NavProp> = () => {
     const [toggle, setToggle] = useState<string>('toggle')
     const [navIsOpen, setNavIsOpen] = useState<boolean>(false)
     const [navH, setNavH] = useState<string>('100vh')
-    const [navcolor, setNavcolor] = useState<string>('transparent')
+    // const [navcolor, setNavcolor] = useState<string>('transparent')
 
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY >= 100) {
-                setNavcolor('#f9f9f9')
-            } else {
-                setNavcolor('transparent')
-            }
-        })
+        // window.addEventListener('scroll', () => {
+        //     if (window.scrollY >= 100) {
+        //         setNavcolor('#f9f9f9')
+        //     } else {
+        //         setNavcolor('transparent')
+        //     }
+        // })
     }, [])
 
     const toggleNav = () => {
@@ -32,13 +32,13 @@ const Nav: React.FC<NavProp> = () => {
     }
     return (
         <div>
-            <nav style={{ backgroundColor: navcolor }}>
+            <nav>
                 <div className="placeholder-to-center"></div>
                 <Header imgUri={"Logo"} />
                 <div className="links">
                     <NavLink to="/home" label="Home" toggle={() => { }} />
                     <NavLink to="/search" label="Search" toggle={() => { }} />
-                    <NavLink to="/orders" label="Orders" toggle={() => { }} />
+                    {/* <NavLink to="/orders" label="Orders" toggle={() => { }} /> */}
                     <Link to="/profile" >
                         <img src={User} alt="" />
                     </Link>
@@ -56,7 +56,7 @@ const Nav: React.FC<NavProp> = () => {
                 transition={{ ease: 'anticipate', duration: .4 }}>
                 <NavLink to="/home" label="Home" toggle={() => toggleNav()} />
                 <NavLink to="/search" label="Search" toggle={() => toggleNav()} />
-                <NavLink to="/orders" label="Orders" toggle={() => toggleNav()} />
+                {/* <NavLink to="/orders" label="Orders" toggle={() => toggleNav()} /> */}
                 <NavLink to="/profile" label="Profile" toggle={() => toggleNav()} />
             </motion.div>
         </div>

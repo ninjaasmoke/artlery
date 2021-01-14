@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { search } from '../api'
 import { Art } from '../ContextTypes'
 
@@ -37,7 +37,9 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                     <div className="art-rating">Rating: {foundArt?.rating}</div>
                     <div className="art-price">Price: ${foundArt?.price}</div>
                     <div className="art-buttons">
-                        <button className="art-buy">Buy Now</button>
+                        <Link to={{
+                            pathname: "/buyart/" + foundArt?.name
+                        }} className="art-buy">Buy Now</Link>
                     </div>
                 </div>
             </div>
