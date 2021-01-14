@@ -25,6 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', apiRoute)
 app.use('/users', userRouter)
 
+// app.get('*', (req, res, next) => {
+//   res.redirect('https://' + req.headers.host + req.url)
+// })
+
 // app.use('/', indexRouter)
 app.use('/', express.static(path.resolve(`${__dirname}/client/build/`)));
 app.get('/*', (req, res) => {

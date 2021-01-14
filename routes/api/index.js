@@ -179,7 +179,28 @@ router.post('/register', (req, res, next) => {
     }
 })
 
-
+router.post('/add-art', (req, res, next) => {
+    const name = req.body.artname;
+    const imageurl = req.body.imageurl;
+    const price = req.body.price;
+    const rating = req.body.rating;
+    if (name !== undefined && imageurl !== undefined && price !== undefined && rating !== undefined) {
+        db.run(`INSERT INTO art(name, imageurl, price, rating) VALUES ("${name}", "${imageurl}", ${price}, ${rating})`, [], (err) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                return res.json({ "error": err });
+            } else {
+                res.status = 200;
+                return res.send(req.body);
+            }
+        })
+    } else {
+        console.log("Details missing");
+        res.send({ "error": "Fill all details!" })
+    }
+    return
+})
 
 
 module.exports = router
