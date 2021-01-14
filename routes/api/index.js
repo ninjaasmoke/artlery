@@ -23,7 +23,6 @@ router.get('/gallery', (req, res, next) => {
             res.status = 200
             res.setHeader('Content-Type', 'application/json')
             return res.send(rows)
-
         }
     })
 })
@@ -189,7 +188,7 @@ router.post('/add-art', (req, res, next) => {
             if (err) {
                 console.error(err);
                 res.status = 200;
-                return res.json({ "error": err });
+                return res.json({ "error": "Internal database error", "err": err });
             } else {
                 res.status = 200;
                 return res.send(req.body);
@@ -202,5 +201,47 @@ router.post('/add-art', (req, res, next) => {
     return
 })
 
+router.post('/placeorder', (req, res, next) => {
+    const username = req.body.username;
+    const artname = req.body.artname;
+    const address = req.body.address;
+    const booked = req.body.booked;
+    const due = req.body.due;
+    if (username !== undefined && artname !== undefined && address !== undefined && booked !== undefined && due != undefined) {
+        db.run(`INSERT INTO orders (username, artname, address, booked, due) VALUES ("${username}", "${artname}", "${address}", "${booked}", "${due}")`,
+            [], (err) => {
+                if (err) {
+                    console.error(err);
+                    res.status = 200;
+                    return res.json({ "error": "Internal database error", "err": err });
+                } else {
+                    res.status = 200;
+                    return res.send(req.body);
+                }
+            })
+    } else {
+        return res.send({ "error": "Fill all details!" })
+    }
+})
+
+router.post('/listorders', (req, res, next) => {
+    const username = req.body.username;
+    if (username !== undefined) {
+        db.all('select * from orders where username=?', [username], (err, rows) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.json({ "error": "Internal database error", "err": err });
+            } else {
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.send(rows);
+            }
+        })
+    } else {
+        return res.json({ "error": "Missing User!" })
+    }
+})
 
 module.exports = router
