@@ -64,7 +64,7 @@ const BuyArt = ({ match }: RouteComponentProps<BuyArtProps>) => {
     return (
         <FadeInTop children={
             <div className="content-body">
-                <div className="nav-space"></div>
+                {/* <div className="nav-space"></div> */}
                 <div className="buy-input">
                     <h2>Enter delivery address</h2>
                     <input type="text" id="address" placeholder="Address" aria-expanded={true} onChange={() => handleAddressText()} />

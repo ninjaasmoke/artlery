@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import User from "../resource/user.png";
+import Arrow from "../resource/arrow.png";
 import { Link, useHistory } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -8,16 +9,17 @@ const Nav: React.FC<NavProp> = () => {
     const [toggle, setToggle] = useState<string>('toggle')
     const [navIsOpen, setNavIsOpen] = useState<boolean>(false)
     const [navH, setNavH] = useState<string>('100vh')
-    // const [navcolor, setNavcolor] = useState<string>('transparent')
+    const history = useHistory();
+    const [showBack, setShowBack] = useState<boolean>(false)
 
     useEffect(() => {
-        // window.addEventListener('scroll', () => {
-        //     if (window.scrollY >= 100) {
-        //         setNavcolor('#f9f9f9')
-        //     } else {
-        //         setNavcolor('transparent')
-        //     }
-        // })
+        history.listen(({ pathname }) => {
+            if (pathname !== '/home') {
+                setShowBack(true)
+            } else {
+                setShowBack(false)
+            }
+        })
     }, [])
 
     const toggleNav = () => {
@@ -33,8 +35,11 @@ const Nav: React.FC<NavProp> = () => {
     return (
         <div>
             <nav>
-                <div className="placeholder-to-center"></div>
-                <Header imgUri={"Logo"} />
+                {/* <div className="placeholder-to-center"></div> */}
+                <div className="header-logo">
+                    {showBack ? <span onClick={() => { history.goBack() }}> <img src={Arrow} alt="" /> </span> : <span />}
+                    <Header imgUri={"Logo"} />
+                </div>
                 <div className="links">
                     <NavLink to="/home" label="Home" toggle={() => { }} />
                     <NavLink to="/search" label="Search" toggle={() => { }} />
@@ -67,6 +72,7 @@ interface HeaderProp {
     imgUri: string;
 }
 const Header: React.FC<HeaderProp> = ({ imgUri }) => {
+
     return (
         <div className="header-img">
             {/* <img src={imgUri} alt="Header Image" /> */}
