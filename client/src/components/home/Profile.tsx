@@ -126,7 +126,6 @@ const Profile: React.FC<ProfileProps> = () => {
     }, [])
     return (
         <div className="content-body">
-            <div className="nav-space"></div>
             <div className="profile-card-holder">
                 {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
                 {username !== "null"

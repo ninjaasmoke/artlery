@@ -421,31 +421,45 @@ nav {
 }
 
 .found-art {
-    margin: 30px 0;
+    // height: 100vh;
+    padding: 40px 0;
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     text-align: start;
+    backdrop-filter: blur(20px);
     @media (max-width: 767px) {
         flex-direction: column; 
+        padding: 20px;
+    }
+
+    .space-filler {
+        width: 10%;
+        @media (max-width: 767px) {
+            display: none;   
+        }
     }
 
     .art-image {
         transition: 400ms ease-out;
         padding: 4px;
         height: 60vh;
-        width: 50%;
+        width: 100%;
         object-fit: contain;
         filter: brightness(80%);
 
         @media (max-width: 767px) {
             width: 100%;
+            max-height: 40vh;
         }
     }
     
-    div {
-        width: 50%;
+    .art-details {
+        background-color: rgba($color: $secColor, $alpha: 0.4);
+        width: 100%;
+        padding: 20px;
+        border-radius: 12px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -453,6 +467,7 @@ nav {
         @media (max-width: 767px) {
             width: 100%;
             padding: 20px;
+            margin-top: 18px;
         }
         .art-name {
             width: 75%;
@@ -478,12 +493,21 @@ nav {
             padding-top: 10px;
             font-size: 24px;
             color: $accent2Color;
+            @media (max-width: 767px) {
+                width: 100%;
+                font-size: 20px;
+                padding: 0px 20px;
+            }
         }
 
         .art-price {
             padding-top: 10px;
             font-size: 16px;
             font-weight: 900;
+            @media (max-width: 767px) {
+                width: 100%;
+                padding: 0px 20px;
+            }
         }
 
         .art-buttons {
@@ -493,6 +517,10 @@ nav {
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
+            @media (max-width: 767px) {
+                width: 100%;
+                padding: 10px 20px;
+            }
         }
 
         .art-button-space {
@@ -1142,5 +1170,20 @@ nav {
     .art-button-space {
         width: 20px;
         height: 20px;
+    }
+}
+
+
+.input-art-details {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .create-art-inputs {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 }

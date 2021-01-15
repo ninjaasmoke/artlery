@@ -10,6 +10,7 @@ import {
 import { getArt } from '../api';
 import { Art } from '../ContextTypes';
 import BuyArt from './BuyArt';
+import CreateArt from './CreateArt';
 import Loading from './Loading';
 
 import Nav from './Nav'
@@ -40,6 +41,7 @@ const Home: React.FC<HomeProps> = () => {
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;900&display=swap" rel="stylesheet" />
             <Nav />
+            <div className="nav-space"></div>
             <Switch>
                 <Route path="/view/:showArt" component={ViewArt} />
                 <Route path="/buyart/:art" component={BuyArt} />
@@ -49,6 +51,7 @@ const Home: React.FC<HomeProps> = () => {
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/orders" component={Orders} />
                 <Route exact path="/profile" component={Profile} />
+                <Route exact path="/create" component={CreateArt} />
                 <Redirect to="/home" />
             </Switch>
         </Router>
@@ -63,7 +66,7 @@ const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
 
     return (
         <div className="content-body">
-            <div className="nav-space"></div>
+            {/* <div className="nav-space"></div> */}
             <motion.div className="home-intro"
                 initial={{ y: '-1vh', opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}

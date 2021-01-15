@@ -8,7 +8,7 @@ interface FadeInProps {
 const FadeInTop: React.FC<FadeInProps> = ({ children, classname }) => {
     return (
         <motion.div
-            initial={{ y: '-10vh', opacity: 0 }}
+            initial={{ y: '-1vh', opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ ease: "easeOut", duration: .4 }}
             className={classname}>
