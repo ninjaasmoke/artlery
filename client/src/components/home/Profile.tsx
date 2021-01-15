@@ -128,6 +128,7 @@ const Profile: React.FC<ProfileProps> = () => {
         <div className="content-body">
             <div className="nav-space"></div>
             <div className="profile-card-holder">
+                {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
                 {username !== "null"
                     ? <UserDetail username={username} userDet={userDet} handleLogout={() => handleLogout()} />
                     : loginState
@@ -193,8 +194,8 @@ const Profile: React.FC<ProfileProps> = () => {
                         } classname="" />
                 }
                 {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
-                {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
             </div>
+            {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
             {/* {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />} */}
         </div>
     )
@@ -206,10 +207,11 @@ interface UserDetailProps {
     handleLogout: () => void
 }
 const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout }) => {
+    const [logoutButton, setLogoutButton] = useState<string>('Logout')
     return (
-        <FadeInTop classname="" children={
+        <FadeInTop classname="profile-card" children={
             <div
-                className="profile-card">
+                className="">
                 <div className="user-heading">
                     <h1>{username}</h1>
                     <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
@@ -220,7 +222,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
                 </div>
                 <div className="user-buttons">
                     {/* <Link to="/orders">View your {userDet?.usertype !== 1 ? "Orders" : "Lisitings"}</Link> */}
-                    <button onClick={() => handleLogout()} className="logout">Logout</button>
+                    <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
                 </div>
             </div>
         } />

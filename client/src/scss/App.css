@@ -786,19 +786,6 @@ nav .placeholder-to-center {
           align-items: flex-start;
 }
 
-.profile-card-holder .error-message {
-  margin: 8px auto;
-  min-width: 90%;
-  min-height: 30px;
-  background-color: #ff23233a;
-  padding: 16px;
-  font-size: 15px;
-  text-align: center;
-  border: 0.1px solid #ff5757;
-  color: #ff2020;
-  font-weight: 500;
-}
-
 .profile-card-holder .profile-login {
   margin: 0 auto;
   min-width: 300px;
@@ -880,17 +867,20 @@ nav .placeholder-to-center {
   font-size: 14px;
   font-weight: 500;
   color: #ef9f4f;
+  text-decoration: underline;
   cursor: pointer;
+  -webkit-transition-duration: 200ms;
+          transition-duration: 200ms;
 }
 
 .profile-card-holder .profile-login .register span:hover {
-  text-decoration: underline;
+  color: #000;
 }
 
 .profile-card-holder .profile-card {
-  max-width: 500px;
   position: fixed;
-  min-height: 300px;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
   border: 1px solid #e7a11f;
   position: relative;
@@ -978,9 +968,8 @@ nav .placeholder-to-center {
 
 @media (max-width: 767px) {
   .profile-card-holder .profile-card {
-    max-width: 100vw;
     width: 100%;
-    margin: 12px auto 0;
+    margin-top: 12px;
   }
 }
 
@@ -1107,10 +1096,13 @@ nav .placeholder-to-center {
   font-weight: 700;
   color: #ef9f4f;
   cursor: pointer;
+  text-decoration: underline;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
 }
 
 .profile-card-holder .register-user .register span:hover {
-  text-decoration: underline;
+  color: #000;
 }
 
 .profile-card-holder .register-user .register h3 {
@@ -1171,7 +1163,7 @@ nav .placeholder-to-center {
 }
 
 .profile-card-holder .orders-list {
-  width: 60%;
+  width: 50%;
   padding: 20px;
 }
 
@@ -1206,6 +1198,7 @@ nav .placeholder-to-center {
 @media (max-width: 767px) {
   .profile-card-holder .orders-list {
     width: 100%;
+    padding: 20px 0;
   }
 }
 
@@ -1219,6 +1212,18 @@ nav .placeholder-to-center {
   }
 }
 
+.error-message {
+  margin: 8px auto;
+  background-color: #ff23233a;
+  width: 100%;
+  padding: 8px;
+  font-size: 15px;
+  text-align: center;
+  border: 0.1px solid #ff5757;
+  color: #ff2020;
+  font-weight: 500;
+}
+
 .buy-art {
   margin: 30px auto;
   width: 100%;
@@ -1229,9 +1234,9 @@ nav .placeholder-to-center {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   text-align: start;
 }
 
@@ -1248,8 +1253,8 @@ nav .placeholder-to-center {
   -webkit-transition: 400ms ease-out;
   transition: 400ms ease-out;
   padding: 4px;
-  height: 60vh;
-  width: 50%;
+  height: 200px;
+  width: 200px;
   -o-object-fit: contain;
      object-fit: contain;
   -webkit-filter: brightness(80%);
@@ -1259,11 +1264,12 @@ nav .placeholder-to-center {
 @media (max-width: 767px) {
   .buy-art .art-image {
     width: 100%;
+    height: 60vh;
   }
 }
 
 .buy-art div {
-  width: 50%;
+  padding-left: 16px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1288,7 +1294,7 @@ nav .placeholder-to-center {
 
 .buy-art div .art-name {
   width: 75%;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 900;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1304,7 +1310,7 @@ nav .placeholder-to-center {
 .buy-art div .art-about {
   padding-top: 10px;
   width: 75%;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 @media (max-width: 767px) {
@@ -1316,13 +1322,13 @@ nav .placeholder-to-center {
 
 .buy-art div .art-rating {
   padding-top: 10px;
-  font-size: 24px;
+  font-size: 14px;
   color: #ef9f4f;
 }
 
 .buy-art div .art-price {
   padding-top: 10px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 900;
 }
 
@@ -1415,12 +1421,23 @@ nav .placeholder-to-center {
   }
 }
 
-.buy-input button {
+.buy-input .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.buy-input .button {
   width: 120px;
   border: none;
   margin-top: 24px;
   padding: 10px 12px;
   border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
   outline: none;
   font-weight: 700;
   font-family: 'Poppins';
@@ -1428,24 +1445,17 @@ nav .placeholder-to-center {
   background-color: #ef9f4f;
   -webkit-transition-duration: 300ms;
           transition-duration: 300ms;
+  color: #242428;
 }
 
-.buy-input button:hover {
+.buy-input .button:hover {
   background-image: none;
   background-color: #f9f9f9;
   color: #ef9f4f;
 }
 
-.buy-input .error-message {
-  margin: 16px 0;
-  min-width: 50%;
-  min-height: 15px;
-  background-color: #ff23233a;
-  padding: 8px;
-  font-size: 15px;
-  text-align: center;
-  border: 0.1px solid #ff5757;
-  color: #ff2020;
-  font-weight: 500;
+.buy-input .art-button-space {
+  width: 20px;
+  height: 20px;
 }
 /*# sourceMappingURL=App.css.map */

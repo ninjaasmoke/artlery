@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { search } from '../api'
 import { Art } from '../ContextTypes'
+import FadeInTop from './animation/FadeInAnim'
 
 type ViewArtProps = {
     showArt: string
@@ -18,6 +19,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         getData()
     }, [])
     return (
@@ -29,7 +31,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                     <img src={foundArt?.url} alt={foundArt?.name} />
                 </div> */}
             </div>
-            <div className="found-art">
+            <FadeInTop children={<div className="found-art">
                 <img alt={foundArt?.name} src={foundArt?.imageurl} className="art-image" />
                 <div>
                     <div className="art-name"> {foundArt?.name}</div>
@@ -42,7 +44,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         }} className="art-buy">Buy Now</Link>
                     </div>
                 </div>
-            </div>
+            </div>} classname="" />
         </div>
     )
 }

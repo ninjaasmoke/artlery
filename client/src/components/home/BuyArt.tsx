@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { placeOrder, search } from '../api'
 import { Art } from '../ContextTypes'
 import FadeInTop from './animation/FadeInAnim'
@@ -55,6 +55,7 @@ const BuyArt = ({ match }: RouteComponentProps<BuyArtProps>) => {
 
     }
     useEffect(() => {
+        window.scrollTo(0, 0)
         const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
         getData()
@@ -65,10 +66,14 @@ const BuyArt = ({ match }: RouteComponentProps<BuyArtProps>) => {
             <div className="content-body">
                 <div className="nav-space"></div>
                 <div className="buy-input">
-                    <h2>Enter your address</h2>
+                    <h2>Enter delivery address</h2>
                     <input type="text" id="address" placeholder="Address" aria-expanded={true} onChange={() => handleAddressText()} />
                     <span></span>
-                    <button onClick={() => handleBuy()}>{orderBuy}</button>
+                    <div className="buttons">
+                        <button onClick={() => handleBuy()} className="button">{orderBuy}</button>
+                        <div className="art-button-space"></div>
+                        {errorMessage === "You need to login to place order!" ? <Link to="/profile" className="button" >Login</Link> : <span></span>}
+                    </div>
                     {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
                 </div>
                 <div className="buy-art">
