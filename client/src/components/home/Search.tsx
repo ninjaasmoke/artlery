@@ -60,7 +60,7 @@ const Search: React.FC<SearchProp> = () => {
                 />
             </div>
             <div className="search-button">
-                <button type="submit" onClick={() => getData(searchtext)}>Search</button>
+                <button type="submit" onClick={() => getData(searchtext)}>{searchState}</button>
             </div>
             {searchError.length !== 0 ? <div className="error-message">{searchError}</div> : <span></span>}
             {

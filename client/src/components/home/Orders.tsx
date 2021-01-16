@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { getOrderList, getUser } from '../api'
+import { getOrderList } from '../api'
 import { Orders } from '../ContextTypes'
 const Cookies = require('js-cookie')
 

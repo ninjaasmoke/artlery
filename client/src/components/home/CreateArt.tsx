@@ -5,7 +5,7 @@ const Cookies = require('js-cookie')
 
 interface CreateArtProp { }
 
-const CreateArt: React.FC<CreateArtProp> = ({ }) => {
+const CreateArt: React.FC<CreateArtProp> = () => {
     const [username, setUsername] = useState<string>('');
     const [message, setMessage] = useState<string>('');
     const [buttonState, setButtonState] = useState<string>('Create');
