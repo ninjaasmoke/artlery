@@ -38,7 +38,7 @@ const CreateArt: React.FC<CreateArtProp> = ({ }) => {
         setErrorMsg('')
         if (artname.length !== 0 && arturl.length !== 0 && artprice !== 0 && artabout.length !== 0) {
             createArt(username, artname, arturl, artprice, artabout).then((data) => {
-                // console.log(data);
+                // // console.log(data);
                 setButtonState('Successful')
                 if (data.artist !== undefined && data.artist.length !== null) {
                     window.location.replace('/home')

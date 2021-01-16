@@ -18,7 +18,7 @@ const Search: React.FC<SearchProp> = () => {
     const getData = async (searchText: string) => {
         if (searchText.length !== 0) {
             setSearchState('Searching...')
-            console.log("Searching");
+            // console.log("Searching");
             setSearchError('')
             search(searchtext).then((data) => {
                 if (data !== null) {

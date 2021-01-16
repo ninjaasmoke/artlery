@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = () => {
     const [art, setArt] = useState<Art[]>([]);
 
     const handleSort = () => {
-        console.log("Handling sort");
+        // console.log("Handling sort");
         if (sort === "def") {
             art.sort((a, b) => b.price - a.price)
             setSort('Price')

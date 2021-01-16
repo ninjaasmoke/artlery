@@ -38,7 +38,7 @@ const BuyArt = ({ match }: RouteComponentProps<BuyArtProps>) => {
             setErrorText('')
             setOrderBuy('Ordering...')
             placeOrder({ username: username, artname: match.params.art, address: addressText, booked: Date().toString().substring(4, 15), due: getDate().substring(4, 15) }).then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data.username === username) {
                     setOrderBuy('Success!')
                     window.location.replace('/profile')

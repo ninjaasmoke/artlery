@@ -58,11 +58,11 @@ const Profile: React.FC<ProfileProps> = () => {
     const handleLogIn = () => {
         if (usernameText.length !== 0 && passwordText.length !== 0) {
             setErrorMessage("")
-            console.log("Ready");
-            console.log(usernameText + "..." + passwordText);
+            // console.log("Ready");
+            // console.log(usernameText + "..." + passwordText);
             setLoading("Loading...")
             login(usernameText, passwordText).then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res?.status === 200) {
                     if (res.data.error === null || res.data.error === undefined) {
                         Cookies.set("username", res?.data.username, { expires: 7 })
@@ -83,7 +83,7 @@ const Profile: React.FC<ProfileProps> = () => {
 
     const handleRegister = () => {
         if (usernameText.length !== 0 && passwordText.length !== 0 && useremailText.length !== 0 && usernameName.length !== 0) {
-            console.log("Registering user");
+            // console.log("Registering user");
             setRegLoading("Registering...")
             register(usernameText, usernameName, useremailText, passwordText, userType).then((res) => {
                 if (res?.status === 200) {
@@ -104,12 +104,12 @@ const Profile: React.FC<ProfileProps> = () => {
     }
 
     const handleLogout = () => {
-        console.log("Trying logout");
+        // console.log("Trying logout");
         logout().then((res) => {
             if (res?.status === 200) {
                 Cookies.remove("username");
                 window.location.replace('/home')
-                console.log("logged out");
+                // console.log("logged out");
             } else {
                 setErrorMessage("Unable to logout :(")
             }
@@ -122,7 +122,7 @@ const Profile: React.FC<ProfileProps> = () => {
         getUser(username !== undefined ? username : "").then((res) => {
             if (res?.data.usertype === 1) {
                 getpostedart(username).then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     setArtList(res);
                 })
             }
@@ -131,7 +131,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 setOrdersList(data)
             })
         })
-        console.log(username);
+        // console.log(username);
     }, [])
     return (
         <div className="content-body">
