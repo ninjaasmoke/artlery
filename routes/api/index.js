@@ -178,25 +178,42 @@ router.post('/register', (req, res, next) => {
     }
 })
 
-router.post('/add-art', (req, res, next) => {
+router.post('/createart', (req, res, next) => {
     const name = req.body.artname;
     const imageurl = req.body.imageurl;
     const price = req.body.price;
-    const rating = req.body.rating;
-    if (name !== undefined && imageurl !== undefined && price !== undefined && rating !== undefined) {
-        db.run(`INSERT INTO art(name, imageurl, price, rating) VALUES ("${name}", "${imageurl}", ${price}, ${rating})`, [], (err) => {
+    const about = req.body.about;
+    const artist = req.body.artist;
+    if (name !== undefined && imageurl !== undefined && price !== undefined && about !== undefined) {
+        db.all(`select * from art where name="${name}"`, [], (err, rows) => {
+            console.log("In api/index/db");
             if (err) {
                 console.error(err);
                 res.status = 200;
-                return res.json({ "error": "Internal database error", "err": err });
-            } else {
+                return res.json({ "error": "There is a database error", "err": err });
+            } else if (rows.length === 0) {
+                console.log(rows);
+                db.run(`INSERT INTO art(name, imageurl, price, artist, about) VALUES ("${name}", "${imageurl}", ${price}, "${artist}", "${about}")`, [], (err) => {
+                    if (err) {
+                        console.error(err);
+                        res.status = 200;
+                        return res.json({ "error": "There is a database error", "err": err });
+                    } else {
+                        console.log("Successfully added new art!");
+                        res.status = 200;
+                        return res.send(req.body);
+                    }
+                })
+            }
+            else {
                 res.status = 200;
-                return res.send(req.body);
+                return res.json({ "error": "Art name already exists!" });
             }
         })
+
     } else {
         console.log("Details missing");
-        res.send({ "error": "Fill all details!" })
+        return res.send({ "error": "Fill all details!" })
     }
     return
 })
@@ -224,6 +241,24 @@ router.post('/placeorder', (req, res, next) => {
             })
     } else {
         return res.send({ "error": "Fill all details!" })
+    }
+})
+
+router.post('/getpostedart', (req, res, next) => {
+    const username = req.body.username;
+    if (username !== undefined) {
+        db.all(`select * from art where artist="${username}"`, [], (err, rows) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.json({ "error": "Internal database error", "err": err });
+            } else {
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.send(rows);
+            }
+        })
     }
 })
 

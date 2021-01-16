@@ -8,10 +8,10 @@ const ErrorBig: React.FC<ErrorProps> = ({ errorMsg }) => {
     return (
         <div className="big-empty">
             Big empty
-            <div className="error-content">
+            {/* <div className="error-content">
                 There seems to be something wrong.
-            </div>
-            <div className="error-message">
+            </div> */}
+            <div className="error-mes">
                 {errorMsg}
             </div>
         </div>

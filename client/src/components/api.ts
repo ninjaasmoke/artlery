@@ -47,6 +47,24 @@ export async function getOrderList(username: string) {
     }
 }
 
+export async function createArt(artist: string, artname: string, url: string, price: number, about: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/createart`, { artist: artist, artname: artname, imageurl: url, price: price, about: about })
+        return res.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getpostedart(username: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/getpostedart`, { username: username })
+        return res.data
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 export async function placeOrder(order: Orders) {
     try {
         const res = await axios.post(`${endpoint}/api/placeorder`,

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { getOrderList, getUser, login, logout, register } from '../api'
+import { getOrderList, getpostedart, getUser, login, logout, register } from '../api'
 // import {  useHistory } from 'react-router-dom'
-import { Orders, UserType } from '../ContextTypes'
+import { Art, Orders, UserType } from '../ContextTypes'
 import FadeInTop from './animation/FadeInAnim'
 import ErrorBig from './Error'
+import FadeInBottom from './animation/FadeInBottom'
+import { Link } from 'react-router-dom'
 // import { UserType } from '../ContextTypes'
 const Cookies = require('js-cookie')
 
@@ -17,6 +19,7 @@ const Profile: React.FC<ProfileProps> = () => {
     const [regLoading, setRegLoading] = useState<string>("Register")
     const [userDet, setUserDet] = useState<UserType>();
     const [ordersList, setOrdersList] = useState([])
+    const [artList, setArtList] = useState([])
     // const history = useHistory()
 
 
@@ -117,6 +120,12 @@ const Profile: React.FC<ProfileProps> = () => {
         const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
         getUser(username !== undefined ? username : "").then((res) => {
+            if (res?.data.usertype === 1) {
+                getpostedart(username).then((res) => {
+                    console.log(res);
+                    setArtList(res);
+                })
+            }
             setUserDet(res?.data);
             getOrderList(res?.data.username).then((data) => {
                 setOrdersList(data)
@@ -127,12 +136,11 @@ const Profile: React.FC<ProfileProps> = () => {
     return (
         <div className="content-body">
             <div className="profile-card-holder">
-                {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
                 {username !== "null"
                     ? <UserDetail username={username} userDet={userDet} handleLogout={() => handleLogout()} />
                     : loginState
                         ? <motion.div
-                            initial={{ y: '-10vh', opacity: 0 }}
+                            initial={{ y: '-1vh', opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ ease: "easeOut", duration: .4 }}
                             className="profile-login">
@@ -152,7 +160,7 @@ const Profile: React.FC<ProfileProps> = () => {
                                 }}>Create Account</span>
                             </div>
                         </motion.div>
-                        : <FadeInTop children={
+                        : <FadeInBottom children={
                             <div className="register-user">
                                 <div className="register hide-mobile">
                                     <h3>Why Register?</h3>
@@ -192,6 +200,7 @@ const Profile: React.FC<ProfileProps> = () => {
                             </div>
                         } classname="" />
                 }
+                {userDet?.usertype === 1 ? <ArtList artList={artList} /> : <div />}
                 {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
             </div>
             {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
@@ -209,8 +218,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
     const [logoutButton, setLogoutButton] = useState<string>('Logout')
     return (
         <FadeInTop classname="profile-card" children={
-            <div
-                className="">
+            <div>
                 <div className="user-heading">
                     <h1>{username}</h1>
                     <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
@@ -220,11 +228,39 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
                     <h3>{userDet?.email}</h3>
                 </div>
                 <div className="user-buttons">
-                    {/* <Link to="/orders">View your {userDet?.usertype !== 1 ? "Orders" : "Lisitings"}</Link> */}
+                    <Link to="/create">Create Art</Link>
                     <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
                 </div>
             </div>
         } />
+    )
+}
+
+interface ArtListProps {
+    artList: Art[]
+}
+const ArtList: React.FC<ArtListProps> = ({ artList }) => {
+    return (
+        <motion.div
+            initial={{ scaleY: .1 }}
+            animate={{ scaleY: 1 }}
+            transition={{ ease: "easeOut", duration: .2 }}
+            className="orders-list"
+        >
+            <h2>Uploads</h2>
+            {artList !== undefined && artList !== null && artList.length !== 0 ?
+                artList?.map((art, index) => (
+                    <div key={index}>
+                        <Link to={{
+                            pathname: "/view/" + art.name
+                        }}>View</Link>
+                        <h3>{art.name}</h3>
+                        <span>{art.about}</span>
+                        <span className="price">${art.price}</span>
+                    </div>
+                ))
+                : <ErrorBig errorMsg="No uploads Yet" />}
+        </motion.div>
     )
 }
 
@@ -240,7 +276,7 @@ const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
             className="orders-list"
         >
             <h2>Orders</h2>
-            {ordersList !== undefined && ordersList !== null ?
+            {ordersList !== undefined && ordersList !== null && ordersList.length !== 0 ?
                 ordersList?.map((order, index) => (
                     <div key={index}>
                         <h3>{order.artname}</h3>

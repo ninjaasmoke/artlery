@@ -2,6 +2,7 @@ export interface Art {
     name: string,
     imageurl: string,
     price: number,
+    about: string,
     rating: number,
     comment: string
 }

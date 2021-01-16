@@ -340,11 +340,13 @@ nav .placeholder-to-center {
   font-weight: 500;
 }
 
-.big-empty .error-message {
+.big-empty .error-mes {
   font-size: 16px;
   font-weight: 900;
-  padding-top: 10px;
-  color: #ef9f4f;
+  margin-top: 20px;
+  color: #ff2020;
+  background-color: rgba(255, 32, 32, 0.1);
+  border: 0.1px solid rgba(255, 32, 32, 0.5);
 }
 
 .home-intro {
@@ -630,7 +632,7 @@ nav .placeholder-to-center {
 }
 
 .found-art .art-details {
-  background-color: rgba(240, 240, 240, 0.4);
+  background-color: rgba(240, 240, 240, 0.6);
   width: 100%;
   padding: 20px;
   border-radius: 12px;
@@ -767,11 +769,15 @@ nav .placeholder-to-center {
 .found-art .art-details .art-buy {
   background-color: #ef9f4f;
   color: #f9f9f9;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  font-weight: 700;
+  border: none;
 }
 
 .found-art .art-details .art-buy:hover {
   background-color: #f9f9f9;
-  color: #ef9f4f;
+  color: #242428;
 }
 
 .view-art {
@@ -956,7 +962,7 @@ nav .placeholder-to-center {
 
 .profile-card-holder .profile-card {
   position: fixed;
-  width: 100%;
+  width: 50%;
   height: 100%;
   border-radius: 12px;
   border: 1px solid #e7a11f;
@@ -1015,6 +1021,23 @@ nav .placeholder-to-center {
   margin-top: 20px;
 }
 
+.profile-card-holder .profile-card a {
+  background-color: #f0f0f0;
+  padding: 9px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  color: #242428;
+}
+
+.profile-card-holder .profile-card a:hover {
+  background-color: rgba(239, 159, 79, 0.1);
+  color: #ef9f4f;
+}
+
 .profile-card-holder .profile-card button {
   border: none;
   outline: none;
@@ -1039,7 +1062,7 @@ nav .placeholder-to-center {
 }
 
 .profile-card-holder .profile-card .logout:hover {
-  background-color: #f9f9f9;
+  background-color: rgba(255, 32, 32, 0.1);
   color: #ff2020;
 }
 
@@ -1242,6 +1265,7 @@ nav .placeholder-to-center {
 .profile-card-holder .orders-list {
   width: 50%;
   padding: 20px;
+  padding-top: 0px;
 }
 
 .profile-card-holder .orders-list h2 {
@@ -1260,15 +1284,40 @@ nav .placeholder-to-center {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
 }
 
 .profile-card-holder .orders-list div h3 {
   font-size: 16px;
   color: #ef9f4f;
+  padding: 4px 0;
 }
 
 .profile-card-holder .orders-list div span {
   width: 100%;
+  font-size: 12px;
+}
+
+.profile-card-holder .orders-list div .price {
+  font-size: 14px;
+  color: #e7a11f;
+  padding-top: 10px;
+}
+
+.profile-card-holder .orders-list div a {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 100px;
+  background-color: rgba(72, 72, 77, 0.7);
+  font-size: 12px;
+  color: #f0f0f0;
+  font-family: 'Poppins';
+  text-decoration: none;
+  padding: 2px 6px;
+}
+
+.profile-card-holder .orders-list span {
   font-size: 14px;
 }
 
@@ -1544,17 +1593,20 @@ nav .placeholder-to-center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .input-art-details .create-art-inputs {
-  width: 30%;
+  width: 40%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1565,5 +1617,61 @@ nav .placeholder-to-center {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+}
+
+.input-art-details .create-art-inputs span {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.input-art-details .create-art-inputs span .art-image-sub {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.input-art-details .create-art-inputs input, .input-art-details .create-art-inputs textarea {
+  border: none;
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  outline: none;
+  font-weight: 500;
+  font-family: 'Poppins';
+}
+
+.input-art-details .create-art-inputs button {
+  border: none;
+  margin-top: 24px;
+  padding: 10px 12px;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  font-weight: 700;
+  font-family: 'Poppins';
+  cursor: pointer;
+  background-color: #ef9f4f;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  color: #242428;
+}
+
+.input-art-details .create-art-inputs button:hover {
+  background-image: none;
+  background-color: #f9f9f9;
+  color: #ef9f4f;
+}
+
+@media (max-width: 900px) {
+  .input-art-details .create-art-inputs {
+    width: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .input-art-details .create-art-inputs {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=App.css.map */
