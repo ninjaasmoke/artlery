@@ -24,6 +24,34 @@ const Cookies = require('js-cookie')
 interface HomeProps { }
 const Home: React.FC<HomeProps> = () => {
     const [username, setUsername] = useState<string>('');
+    const [sort, setSort] = useState<string>('def')
+    const [art, setArt] = useState<Art[]>([]);
+
+    const handleSort = () => {
+        console.log("Handling sort");
+        if (sort === "def") {
+            art.sort((a, b) => b.price - a.price)
+            setSort('Price')
+        } else if (sort === 'Price') {
+            art.sort((a, b) => {
+                if (b.name < a.name) return 1;
+                else if (a.name < b.name) return -1;
+                else return 0;
+            })
+            setSort('Name A-Z')
+        } else if (sort === 'Name A-Z') {
+            art.sort((a, b) => {
+                if (b.name < a.name) return -1;
+                else if (a.name < b.name) return 1;
+                else return 0;
+            })
+            setSort('Name Z-A')
+        } else {
+            art.sort((a, b) => b.price - a.price)
+            setSort('Price')
+        }
+
+    }
     useEffect(() => {
         const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
@@ -31,7 +59,6 @@ const Home: React.FC<HomeProps> = () => {
             setArt(data)
         })
     }, [])
-    const [art, setArt] = useState([]);
     return (
         <Router>
             <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -46,7 +73,7 @@ const Home: React.FC<HomeProps> = () => {
                 <Route path="/view/:showArt" component={ViewArt} />
                 <Route path="/buyart/:art" component={BuyArt} />
                 <Route exact path="/home">
-                    <HomeComp art={art} username={username} />
+                    <HomeComp art={art} username={username} sort={sort} handleSort={() => handleSort()} />
                 </Route>
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/orders" component={Orders} />
@@ -59,10 +86,12 @@ const Home: React.FC<HomeProps> = () => {
 }
 
 interface HomeCompProp {
-    art: Art[],
-    username: string
+    art: Art[];
+    username: string;
+    sort: string;
+    handleSort: Function;
 }
-const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
+const HomeComp: React.FC<HomeCompProp> = ({ art, username, sort, handleSort }) => {
 
     return (
         <div className="content-body">
@@ -84,6 +113,7 @@ const HomeComp: React.FC<HomeCompProp> = ({ art, username }) => {
                 </div>
             </motion.div>
             <div className="art">
+                <span onClick={() => handleSort()}>Sorted By: {sort === 'def' ? "Latest" : sort}</span>
                 {art.length ?
                     art.map((artVal: Art, index: number) => (
                         <Link to={{

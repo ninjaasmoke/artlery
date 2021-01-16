@@ -337,8 +337,29 @@ nav {
 .art {
     width: 100%;
     padding: 40px;
+    position: relative;
+    span {
+        position: absolute;
+        top: 0px;
+        right: 40px;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 100px;
+        padding: 2px 12px;
+        background-color: $secColor;
+
+        &:hover {
+            color: $accent2Color;
+            background-color: rgba($color: $accent2Color, $alpha: 0.1);
+        }
+
+        @media (max-width: 576px) {
+            right: 4px;
+        }
+    }
     @media (max-width: 576px) {
         padding: 0;
+        padding-top: 28px;
     }
 }
 

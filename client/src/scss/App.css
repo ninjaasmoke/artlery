@@ -422,11 +422,35 @@ nav .placeholder-to-center {
 .art {
   width: 100%;
   padding: 40px;
+  position: relative;
+}
+
+.art span {
+  position: absolute;
+  top: 0px;
+  right: 40px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 100px;
+  padding: 2px 12px;
+  background-color: #f0f0f0;
+}
+
+.art span:hover {
+  color: #ef9f4f;
+  background-color: rgba(239, 159, 79, 0.1);
+}
+
+@media (max-width: 576px) {
+  .art span {
+    right: 4px;
+  }
 }
 
 @media (max-width: 576px) {
   .art {
     padding: 0;
+    padding-top: 28px;
   }
 }
 
