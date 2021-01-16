@@ -57,7 +57,7 @@ const CreateArt: React.FC<CreateArtProp> = ({ }) => {
         setUsername(username === undefined ? "null" : username)
         getUser(username !== undefined ? username : "").then((res) => {
             if (res?.data.usertype === 2) {
-                setMessage("Unauthorized! You are on a customer account, create an artist to sell art!")
+                setMessage("Unauthorized! You are on a customer account, create an artist account to sell art!")
             }
         })
     }, [])

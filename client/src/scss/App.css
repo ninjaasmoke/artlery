@@ -554,7 +554,7 @@ nav .placeholder-to-center {
 }
 
 .search-button {
-  padding-top: 20px;
+  padding: 20px 0;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;

@@ -228,7 +228,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
                     <h3>{userDet?.email}</h3>
                 </div>
                 <div className="user-buttons">
-                    <Link to="/create">Create Art</Link>
+                    {userDet?.usertype === 1 ? <Link to="/create">Create Art</Link> : <span></span>}
                     <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
                 </div>
             </div>
@@ -259,7 +259,7 @@ const ArtList: React.FC<ArtListProps> = ({ artList }) => {
                         <span className="price">${art.price}</span>
                     </div>
                 ))
-                : <ErrorBig errorMsg="No uploads Yet" />}
+                : <ErrorBig errorMsg="No Uploads Yet" />}
         </motion.div>
     )
 }

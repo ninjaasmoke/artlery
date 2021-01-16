@@ -6,27 +6,32 @@ import FadeInBottom from './animation/FadeInBottom';
 
 interface SearchProp { }
 const Search: React.FC<SearchProp> = () => {
-    // const [searched, setSearched] = useState<string>('')
+    const [searchError, setSearchError] = useState<string>('')
     const [searchtext, setSearchtext] = useState<string>('')
     const [foundArt, setFoundArt] = useState<Art>()
+    const [searchState, setSearchState] = useState<string>('Search')
 
     const handleChange = (searchText: string) => {
         var text = (document.getElementById('search-text') as HTMLInputElement).value
         setSearchtext(text)
     }
     const getData = async (searchText: string) => {
-
         if (searchText.length !== 0) {
+            setSearchState('Searching...')
             console.log("Searching");
+            setSearchError('')
             search(searchtext).then((data) => {
-                // setSearched(searchText)
-                setFoundArt(data);
-                if (window.innerWidth > 767) {
-                    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+                if (data !== null) {
+                    setFoundArt(data);
+                    setSearchState('Search')
+                    if (window.innerWidth > 767) {
+                        window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
+                    }
+                } else {
+                    setSearchError('Didn\'t find anything...')
+                    setFoundArt(undefined)
                 }
             })
-        } else {
-            console.log(searchText);
         }
     }
 
@@ -57,13 +62,14 @@ const Search: React.FC<SearchProp> = () => {
             <div className="search-button">
                 <button type="submit" onClick={() => getData(searchtext)}>Search</button>
             </div>
+            {searchError.length !== 0 ? <div className="error-message">{searchError}</div> : <span></span>}
             {
                 foundArt ?
                     <FadeInBottom
                         classname=""
                         children={<div className="found-art">
                             <img alt={foundArt.name} src={foundArt.imageurl} className="art-image" />
-                            <div>
+                            <div className="art-details">
                                 <div className="art-name"> {foundArt.name}</div>
                                 <div className="art-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem sed tenetur illo, magnam accusamus tempora doloremque modi, odio, earum sunt quas quisquam quae nesciunt ducimus ullam eligendi quos cupiditate.</div>
                                 <div className="art-rating">Rating: {foundArt.rating}</div>
