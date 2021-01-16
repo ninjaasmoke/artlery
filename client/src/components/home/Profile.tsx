@@ -229,6 +229,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
                 </div>
                 <div className="user-buttons">
                     {userDet?.usertype === 1 ? <Link to="/create">Create Art</Link> : <span></span>}
+                    <div className="space"></div>
                     <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
                 </div>
             </div>

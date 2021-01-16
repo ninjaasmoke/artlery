@@ -1045,6 +1045,10 @@ nav .placeholder-to-center {
   margin-top: 20px;
 }
 
+.profile-card-holder .profile-card .user-buttons .space {
+  width: 20px;
+}
+
 .profile-card-holder .profile-card a {
   background-color: #f0f0f0;
   padding: 9px 12px;
