@@ -9,7 +9,7 @@ const endpoint =
 export async function getArt() {
     try {
         const { data } = await axios.get(`${endpoint}/api/gallery`)
-        // console.log(data);
+        // // console.log(data);
         return data
     } catch (err) {
         console.error(err);
@@ -30,7 +30,7 @@ export async function search(searchText: string) {
 export async function getUser(username: string) {
     try {
         const res = await axios.post(`${endpoint}/api/user`, { username: username })
-        // console.log(res);
+        // // console.log(res);
         return res
     } catch (error) {
         console.error(error);
@@ -69,7 +69,7 @@ export async function placeOrder(order: Orders) {
     try {
         const res = await axios.post(`${endpoint}/api/placeorder`,
             { username: order.username, artname: order.artname, address: order.address, booked: order.booked, due: order.due })
-        console.log(res.data);
+        // console.log(res.data);
 
         return res.data
     } catch (error) {
@@ -81,7 +81,7 @@ export async function register(username: string, usernameName: string, email: st
     const sql = `insert into user (username, firstname, email, password, usertype) values ("${username}", "${usernameName}", "${email}", "${password}", ${usertype})` as string;
     try {
         const res = await axios.post(`${endpoint}/api/register`, { "sql": sql, "username": username })
-        console.log(res);
+        // console.log(res);
         return res;
     } catch (error) {
         console.error(error);
@@ -100,7 +100,7 @@ export async function login(username: string, password: string) {
 export async function logout() {
     try {
         const res = await axios.get(`${endpoint}/api/logout`)
-        console.log(res);
+        // console.log(res);
         return res
     } catch (err) {
         console.error(err)
