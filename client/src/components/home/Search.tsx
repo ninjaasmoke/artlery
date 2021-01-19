@@ -23,7 +23,6 @@ const Search: React.FC<SearchProp> = () => {
             search(searchtext).then((data) => {
                 if (data !== null) {
                     setFoundArt(data);
-                    setSearchState('Search')
                     if (window.innerWidth > 767) {
                         window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
                     }
@@ -31,6 +30,7 @@ const Search: React.FC<SearchProp> = () => {
                     setSearchError('Didn\'t find anything...')
                     setFoundArt(undefined)
                 }
+                setSearchState('Search')
             })
         }
     }
