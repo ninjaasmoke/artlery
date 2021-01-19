@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import { search } from '../api';
 import { Art } from '../ContextTypes';
 import FadeInTop from './animation/FadeInAnim';
@@ -77,7 +78,9 @@ const Search: React.FC<SearchProp> = () => {
                                 <div className="art-buttons">
                                     {/* <button className="art-view">View</button>
                             <span className="art-button-space"></span> */}
-                                    <button className="art-buy">Buy Now</button>
+                                    <Link to={{
+                                        pathname: "/buyart/" + foundArt?.name
+                                    }} className="art-buy">Buy Now</Link>
                                 </div>
                             </div>
                         </div>} />

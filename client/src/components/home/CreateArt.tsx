@@ -39,11 +39,13 @@ const CreateArt: React.FC<CreateArtProp> = () => {
         if (artname.length !== 0 && arturl.length !== 0 && artprice !== 0 && artabout.length !== 0) {
             createArt(username, artname, arturl, artprice, artabout).then((data) => {
                 // // console.log(data);
-                setButtonState('Successful')
                 if (data.artist !== undefined && data.artist.length !== null) {
                     window.location.replace('/home')
+                    setButtonState('Successful')
                 } else if (data.error !== undefined) {
                     setErrorMsg(data.error)
+                    setButtonState('Create')
+                    window.scroll(0, window.innerHeight)
                 }
             })
         } else {

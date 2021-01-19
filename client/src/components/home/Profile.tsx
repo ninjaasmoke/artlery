@@ -144,8 +144,9 @@ const Profile: React.FC<ProfileProps> = () => {
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ ease: "easeOut", duration: .4 }}
                             className="profile-login">
-                            <span className="login">Please Login</span>
                             <div className="login-form">
+                                <span className="login">Please Login</span>
+                                <hr />
                                 <span>Username</span>
                                 <input type="text" name="" id="username-text"
                                     autoComplete="false" onChange={() => handleText()} />
@@ -217,20 +218,23 @@ interface UserDetailProps {
 const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout }) => {
     const [logoutButton, setLogoutButton] = useState<string>('Logout')
     return (
-        <FadeInTop classname="profile-card" children={
+        <FadeInTop classname="profile" children={
             <div>
-                <div className="user-heading">
-                    <h1>{username}</h1>
-                    <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
-                </div>
-                <div className="user-detail">
-                    <h3>{userDet?.firstname}</h3>
-                    <h3>{userDet?.email}</h3>
-                </div>
-                <div className="user-buttons">
-                    {userDet?.usertype === 1 ? <Link to="/create">Create Art</Link> : <span></span>}
-                    <div className="space"></div>
-                    <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
+                <h2>Profile</h2>
+                <div className="profile-card">
+                    <div className="user-heading">
+                        <h1>{username}</h1>
+                        <h2>{userDet?.usertype === 1 ? "Artist" : "Customer"}</h2>
+                    </div>
+                    <div className="user-detail">
+                        <h3>{userDet?.firstname}</h3>
+                        <h3>{userDet?.email}</h3>
+                    </div>
+                    <div className="user-buttons">
+                        {userDet?.usertype === 1 ? <Link to="/create">Create Art</Link> : <span></span>}
+                        <div className="space"></div>
+                        <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
+                    </div>
                 </div>
             </div>
         } />
@@ -242,26 +246,25 @@ interface ArtListProps {
 }
 const ArtList: React.FC<ArtListProps> = ({ artList }) => {
     return (
-        <motion.div
-            initial={{ scaleY: .1 }}
-            animate={{ scaleY: 1 }}
-            transition={{ ease: "easeOut", duration: .2 }}
-            className="orders-list"
-        >
+        <div className="orders-list">
             <h2>Uploads</h2>
             {artList !== undefined && artList !== null && artList.length !== 0 ?
                 artList?.map((art, index) => (
-                    <div key={index}>
+                    <motion.div key={index}
+                        initial={{ scaleY: .1 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ ease: "easeOut", duration: .2 }}
+                    >
                         <Link to={{
                             pathname: "/view/" + art.name
                         }}>View</Link>
                         <h3>{art.name}</h3>
                         <span>{art.about}</span>
                         <span className="price">${art.price}</span>
-                    </div>
+                    </motion.div>
                 ))
                 : <ErrorBig errorMsg="No Uploads Yet" />}
-        </motion.div>
+        </div>
     )
 }
 
@@ -270,24 +273,25 @@ interface OrderProp {
 }
 const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
     return (
-        <motion.div
-            initial={{ scaleY: .1 }}
-            animate={{ scaleY: 1 }}
-            transition={{ ease: "easeOut", duration: .2 }}
+        <div
             className="orders-list"
         >
             <h2>Orders</h2>
             {ordersList !== undefined && ordersList !== null && ordersList.length !== 0 ?
                 ordersList?.map((order, index) => (
-                    <div key={index}>
+                    <motion.div key={index}
+                        initial={{ scaleY: .1 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ ease: "easeOut", duration: .2 }}
+                    >
                         <h3>{order.artname}</h3>
                         <span>Delivery at: {order.address}</span>
                         <span>Due: {order.due}</span>
                         <span>Booked: {order.booked}</span>
-                    </div>
+                    </motion.div>
                 ))
                 : <ErrorBig errorMsg="No Orders Yet" />}
-        </motion.div>
+        </div>
     )
 }
 

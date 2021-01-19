@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Product';
-  src: url("../fonts/Proxima Nova Bold.otf");
+  src: url("../fonts/Product Sans Regular.ttf");
 }
 
 ::-webkit-scrollbar {
@@ -183,6 +183,11 @@ nav .placeholder-to-center {
   }
 }
 
+.nav-shadow {
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(72, 72, 77, 0.1);
+          box-shadow: 0px 0px 10px 2px rgba(72, 72, 77, 0.1);
+}
+
 .nav-space {
   height: 60px;
 }
@@ -228,13 +233,23 @@ nav .placeholder-to-center {
   }
 }
 
-.header-img div .black-header {
+.header-img a {
+  text-decoration: none;
+  color: #ef9f4f;
+  font-family: 'Redressed', cursive;
+  font-size: 26px;
+}
+
+.header-img a .black-header {
   color: #242428;
   padding-right: 1px;
+  font-weight: 700;
+  font-size: 20px;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media (max-width: 767px) {
-  .header-img div .black-header {
+  .header-img a .black-header {
     padding-right: 1px;
   }
 }
@@ -350,7 +365,7 @@ nav .placeholder-to-center {
 }
 
 .home-intro {
-  height: 30vh;
+  min-height: 30vh;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -684,7 +699,7 @@ nav .placeholder-to-center {
 }
 
 .found-art .art-details .art-name {
-  width: 75%;
+  width: 100%;
   font-size: 30px;
   font-weight: 900;
 }
@@ -698,7 +713,7 @@ nav .placeholder-to-center {
 
 .found-art .art-details .art-about {
   padding-top: 10px;
-  width: 75%;
+  width: 100%;
   font-size: 16px;
 }
 
@@ -937,7 +952,17 @@ nav .placeholder-to-center {
   font-weight: 500;
   padding-top: 24px;
   padding-bottom: 4px;
-  font-size: 18px;
+  font-size: 16px;
+}
+
+.profile-card-holder .profile-login .login-form .login {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.profile-card-holder .profile-login .login-form hr {
+  width: 100%;
+  margin: 4px 0;
 }
 
 .profile-card-holder .profile-login .login-form input {
@@ -984,9 +1009,18 @@ nav .placeholder-to-center {
   color: #000;
 }
 
-.profile-card-holder .profile-card {
-  position: fixed;
+.profile-card-holder .profile {
+  padding: 0 20px;
   width: 50%;
+}
+
+.profile-card-holder .profile h2 {
+  margin-bottom: 12px;
+}
+
+.profile-card-holder .profile .profile-card {
+  position: fixed;
+  width: 100%;
   height: 100%;
   border-radius: 12px;
   border: 1px solid #e7a11f;
@@ -1006,31 +1040,31 @@ nav .placeholder-to-center {
   padding: 20px;
 }
 
-.profile-card-holder .profile-card .user-heading h1 {
+.profile-card-holder .profile .profile-card .user-heading h1 {
   font-size: 48px;
   color: #242428;
 }
 
 @media (max-width: 767px) {
-  .profile-card-holder .profile-card .user-heading h1 {
+  .profile-card-holder .profile .profile-card .user-heading h1 {
     font-size: 40px;
   }
 }
 
-.profile-card-holder .profile-card .user-heading h2 {
+.profile-card-holder .profile .profile-card .user-heading h2 {
   margin-top: -8px;
 }
 
-.profile-card-holder .profile-card .user-detail span {
+.profile-card-holder .profile .profile-card .user-detail span {
   font-weight: 700;
 }
 
-.profile-card-holder .profile-card .user-detail h3 {
+.profile-card-holder .profile .profile-card .user-detail h3 {
   font-size: 14px;
   color: #48484d;
 }
 
-.profile-card-holder .profile-card .user-buttons {
+.profile-card-holder .profile .profile-card .user-buttons {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1045,11 +1079,11 @@ nav .placeholder-to-center {
   margin-top: 20px;
 }
 
-.profile-card-holder .profile-card .user-buttons .space {
+.profile-card-holder .profile .profile-card .user-buttons .space {
   width: 20px;
 }
 
-.profile-card-holder .profile-card a {
+.profile-card-holder .profile .profile-card a {
   background-color: #f0f0f0;
   padding: 9px 12px;
   border-radius: 20px;
@@ -1061,12 +1095,12 @@ nav .placeholder-to-center {
   color: #242428;
 }
 
-.profile-card-holder .profile-card a:hover {
+.profile-card-holder .profile .profile-card a:hover {
   background-color: rgba(239, 159, 79, 0.1);
   color: #ef9f4f;
 }
 
-.profile-card-holder .profile-card button {
+.profile-card-holder .profile .profile-card button {
   border: none;
   outline: none;
   background-color: #f0f0f0;
@@ -1080,24 +1114,28 @@ nav .placeholder-to-center {
           transition-duration: 300ms;
 }
 
-.profile-card-holder .profile-card button:hover {
+.profile-card-holder .profile .profile-card button:hover {
   background-color: #f9f9f9;
   color: #e7a11f;
 }
 
-.profile-card-holder .profile-card .logout {
+.profile-card-holder .profile .profile-card .logout {
   color: #ff2020;
 }
 
-.profile-card-holder .profile-card .logout:hover {
+.profile-card-holder .profile .profile-card .logout:hover {
   background-color: rgba(255, 32, 32, 0.1);
   color: #ff2020;
 }
 
 @media (max-width: 767px) {
-  .profile-card-holder .profile-card {
+  .profile-card-holder .profile {
     width: 100%;
     margin-top: 12px;
+    padding: 0;
+  }
+  .profile-card-holder .profile h2 {
+    font-size: 26px;
   }
 }
 
@@ -1164,11 +1202,11 @@ nav .placeholder-to-center {
 
 .profile-card-holder .register-user .profile-register hr {
   width: 100%;
-  margin: 10px 0;
+  margin: 8px 0;
 }
 
 .profile-card-holder .register-user .profile-register .user-detail {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   padding-top: 8px;
 }
@@ -1302,8 +1340,8 @@ nav .placeholder-to-center {
 
 .profile-card-holder .orders-list div {
   border-radius: 4px;
-  -webkit-box-shadow: 1px 1px 5px 0.1px rgba(72, 72, 77, 0.1);
-          box-shadow: 1px 1px 5px 0.1px rgba(72, 72, 77, 0.1);
+  -webkit-box-shadow: 0px 0px 5px 0.1px rgba(72, 72, 77, 0.1);
+          box-shadow: 0px 0px 5px 0.1px rgba(72, 72, 77, 0.1);
   padding: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1313,12 +1351,15 @@ nav .placeholder-to-center {
       -ms-flex-direction: column;
           flex-direction: column;
   position: relative;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
 }
 
 .profile-card-holder .orders-list div h3 {
   font-size: 16px;
   color: #ef9f4f;
   padding: 4px 0;
+  padding-right: 30px;
 }
 
 .profile-card-holder .orders-list div span {
@@ -1343,6 +1384,18 @@ nav .placeholder-to-center {
   font-family: 'Poppins';
   text-decoration: none;
   padding: 2px 6px;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.profile-card-holder .orders-list div a:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.profile-card-holder .orders-list div:hover {
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(72, 72, 77, 0.1);
+          box-shadow: 0px 0px 10px 2px rgba(72, 72, 77, 0.1);
 }
 
 .profile-card-holder .orders-list span {
@@ -1369,8 +1422,7 @@ nav .placeholder-to-center {
 .error-message {
   margin: 8px auto;
   background-color: #ff23233a;
-  width: 100%;
-  padding: 8px;
+  padding: 8px 16px;
   font-size: 15px;
   text-align: center;
   border: 0.1px solid #ff5757;

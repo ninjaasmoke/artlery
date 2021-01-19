@@ -11,6 +11,7 @@ const Nav: React.FC<NavProp> = () => {
     const [navH, setNavH] = useState<string>('100vh')
     const history = useHistory();
     const [showBack, setShowBack] = useState<boolean>(false)
+    const [navShadow, setNavShadow] = useState<string>('')
 
     useEffect(() => {
         history.listen(({ pathname }) => {
@@ -18,6 +19,17 @@ const Nav: React.FC<NavProp> = () => {
                 setShowBack(true)
             } else {
                 setShowBack(false)
+            }
+        })
+
+        window.addEventListener('scroll', () => {
+            let vh = window.innerHeight
+            let scroll = window.scrollY
+
+            if (scroll > 50) {
+                setNavShadow('nav-shadow')
+            } else {
+                setNavShadow('')
             }
         })
     }, [])
@@ -34,7 +46,7 @@ const Nav: React.FC<NavProp> = () => {
     }
     return (
         <div>
-            <nav>
+            <nav className={navShadow}>
                 {/* <div className="placeholder-to-center"></div> */}
                 <div className="header-logo">
                     {showBack ? <span onClick={() => { history.goBack() }}> <img src={Arrow} alt="" /> </span> : <span />}
@@ -76,7 +88,7 @@ const Header: React.FC<HeaderProp> = ({ imgUri }) => {
     return (
         <div className="header-img">
             {/* <img src={imgUri} alt="Header Image" /> */}
-            <div><span className="black-header">Art</span> Gallery</div>
+            <div><Link to="/home"><span className="black-header">Art</span> Gallery</Link></div>
         </div>
     )
 }

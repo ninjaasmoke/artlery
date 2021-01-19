@@ -282,4 +282,24 @@ router.post('/listorders', (req, res, next) => {
     }
 })
 
+router.post('/listdeliveries', (req, res, next) => {
+    const artist = req.body.artist;
+    if (username !== undefined) {
+        db.all(`select * from orders where artist="${artist}"`, [], (err, rows) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.json({ "error": "Internal database error", "err": err });
+            } else {
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.send(rows);
+            }
+        })
+    } else {
+        return res.json({ "error": "Missing User!" })
+    }
+})
+
 module.exports = router
