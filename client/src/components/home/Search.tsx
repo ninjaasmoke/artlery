@@ -73,11 +73,13 @@ const Search: React.FC<SearchProp> = () => {
                             <div className="art-details">
                                 <div className="art-name"> {foundArt.name}</div>
                                 <div className="art-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem sed tenetur illo, magnam accusamus tempora doloremque modi, odio, earum sunt quas quisquam quae nesciunt ducimus ullam eligendi quos cupiditate.</div>
-                                <div className="art-rating">Rating: {foundArt.rating}</div>
+                                {/* <div className="art-rating">Rating: {foundArt.rating}</div> */}
                                 <div className="art-price">Price: ${foundArt.price}</div>
                                 <div className="art-buttons">
-                                    {/* <button className="art-view">View</button>
-                            <span className="art-button-space"></span> */}
+                                    <Link to={{
+                                        pathname: "/view/" + foundArt.name
+                                    }} className="art-buy">View</Link>
+                                    <span className="art-button-space"></span>
                                     <Link to={{
                                         pathname: "/buyart/" + foundArt?.name
                                     }} className="art-buy">Buy Now</Link>

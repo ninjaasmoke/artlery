@@ -632,6 +632,10 @@ nav {
     padding: 20px;
     position: relative;
 
+    div {
+        font-size: 14px;
+    }
+
     .arrow-open, .arrow-closed {
         border: solid #999;
         border-width: 0 2px 2px 0;
@@ -726,11 +730,14 @@ nav {
         padding: 12px 24px;
         border-radius: 8px;
         font-size: 14px;
-        h4 {
-            font-size: 16px;
+        h6 {
+            font-size: 13px;
             margin-top: 4px;
         }
         margin-top: 3px;
+    }
+    .comment:nth-child(even) {
+        background-color: #e7e7e7;
     }
     textarea {
         width: 100%;

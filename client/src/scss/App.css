@@ -841,6 +841,10 @@ nav .placeholder-to-center {
   position: relative;
 }
 
+.art-rating div {
+  font-size: 14px;
+}
+
 .art-rating .arrow-open, .art-rating .arrow-closed {
   border: solid #999;
   border-width: 0 2px 2px 0;
@@ -958,9 +962,13 @@ nav .placeholder-to-center {
   margin-top: 3px;
 }
 
-.art-comments .comment h4 {
-  font-size: 16px;
+.art-comments .comment h6 {
+  font-size: 13px;
   margin-top: 4px;
+}
+
+.art-comments .comment:nth-child(even) {
+  background-color: #e7e7e7;
 }
 
 .art-comments textarea {

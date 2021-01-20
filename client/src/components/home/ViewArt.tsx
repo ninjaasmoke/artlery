@@ -46,8 +46,8 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
     const handlePostRating = () => {
         setButtonState("Rating...")
         postRating(parseInt(userRating?.value === undefined ? "5" : userRating.value), Username, foundArt?.name ?? "").then((res) => {
-            // console.log(res);
             window.location.reload()
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
         })
         setButtonState("Rate")
     }
@@ -56,7 +56,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
         if (comment.length !== 0) {
             postComment(comment, Username, foundArt?.name ?? "").then((res) => {
                 window.location.reload()
-                // console.log(res);
+                window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
             })
         }
     }
@@ -95,8 +95,6 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         <span>Rating: {rating}</span>
                         <div>Rate this item</div>
                         <ReactDropdown
-                            arrowClosed={(<span className="arrow-closed"></span>)}
-                            arrowOpen={(<span className="arrow-openx"></span>)}
                             options={options} value={defOption} placeholder="Rate this item" onChange={(option) => { setUserRating(option) }} />
                         <button onClick={() => handlePostRating()}>{buttonState}</button>
                     </div> : <span></span>
@@ -107,8 +105,8 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         <h2>Comments</h2>
                         {comments?.map((comm, index) => (
                             <div key={index} className="comment">
-                                <h4>{comm.username}</h4>
-                                {comm.comment}
+                                <p>{comm.comment}</p>
+                                <h6>{comm.username}</h6>
                             </div>
                         ))}
                         <h3>Add Comment</h3>
