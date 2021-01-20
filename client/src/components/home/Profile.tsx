@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { deleteArt, deleteOrder, getDeliveries, getOrderList, getpostedart, getUser, login, logout, register } from '../api'
+import { allOrders, allUsers, deleteArt, deleteOrder, deleteUser, getArt, getDeliveries, getOrderList, getpostedart, getUser, login, logout, register } from '../api'
 // import {  useHistory } from 'react-router-dom'
 import { Art, Orders, UserType } from '../ContextTypes'
 import FadeInTop from './animation/FadeInAnim'
@@ -142,78 +142,169 @@ const Profile: React.FC<ProfileProps> = () => {
     }, [])
     return (
         <div className="content-body">
-            <div className="profile-card-holder">
-                {username !== "null"
-                    ? <UserDetail username={username} userDet={userDet} handleLogout={() => handleLogout()} />
-                    : loginState
-                        ? <motion.div
-                            initial={{ y: '-1vh', opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ ease: "easeOut", duration: .4 }}
-                            className="profile-login">
-                            <div className="login-form">
-                                <span className="login">Please Login</span>
-                                <hr />
-                                <span>Username</span>
-                                <input type="text" name="" id="username-text"
-                                    autoComplete="false" onChange={() => handleText()} />
-                                <span>Password</span>
-                                <input type="password" name="" id="password-text" onChange={() => handlePassword()} />
-                                <button onClick={() => handleLogIn()}>{loading}</button>
-                            </div>
-                            <div className="register">
-                                New to Art Gallery? <span onClick={() => {
-                                    setLoginState(!loginState)
-                                    setErrorMessage("")
-                                }}>Create Account</span>
-                            </div>
-                        </motion.div>
-                        : <FadeInBottom children={
-                            <div className="register-user">
-                                <div className="register hide-mobile">
-                                    <h3>Why Register?</h3>
-                                    <ul>
-                                        <li>Get unlimited free deliveries.</li>
-                                        <li>Place orders on you favourite Arts.</li>
-                                        <li>Login anywhere.</li>
-                                    </ul>
-                                </div>
-                                <div className="place"></div>
-                                <div className="profile-register">
-                                    <span className="register-head">Register</span>
-                                    <span className="register-message">Please fill in the following details about yourself.</span>
-                                    <hr />
-                                    <span>I am here to</span>
-                                    <div className="user-type">
-                                        <button className={userType === 2 ? "selected" : ""} onClick={() => setUserType(2)}>Buy Art</button>
-                                        <button className={userType === 1 ? "selected" : ""} onClick={() => setUserType(1)}>Sell Art</button>
+            {
+                userDet?.usertype !== 0 ?
+                    <div className="profile-card-holder">
+                        {username !== "null"
+                            ? <UserDetail username={username} userDet={userDet} handleLogout={() => handleLogout()} />
+                            : loginState
+                                ? <motion.div
+                                    initial={{ y: '-1vh', opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ ease: "easeOut", duration: .4 }}
+                                    className="profile-login">
+                                    <div className="login-form">
+                                        <span className="login">Please Login</span>
+                                        <hr />
+                                        <span>Username</span>
+                                        <input type="text" name="" id="username-text"
+                                            autoComplete="false" onChange={() => handleText()} />
+                                        <span>Password</span>
+                                        <input type="password" name="" id="password-text" onChange={() => handlePassword()} />
+                                        <button onClick={() => handleLogIn()}>{loading}</button>
                                     </div>
-                                    <span className="user-detail">Name</span>
-                                    <input type="text" name="user-name" id="user-detail-name" onChange={() => handleRegUsernameName()} />
-                                    <span className="user-detail">Username</span>
-                                    <input type="text" name="user-username" id="user-detail-username" onChange={() => handleRegUsername()} />
-                                    <span className="user-detail">Email</span>
-                                    <input type="email" name="user-email" id="user-detail-email" onChange={() => handleRegEmail()} />
-                                    <span className="user-detail">Password</span>
-                                    <input type="password" name="user-password" id="user-detail-password" onChange={() => handleRegPassword()} />
-                                    <button type="submit" className="register-button" onClick={() => handleRegister()}>{regLoading}</button>
-                                </div>
-                                <div className="place"></div>
-                                <div className="register">
-                                    Already have an account? <span onClick={() => {
-                                        setLoginState(!loginState)
-                                        setErrorMessage("")
-                                    }}>Login</span>
-                                </div>
-                            </div>
-                        } classname="" />
-                }
-                {userDet?.usertype === 1 ? <ArtList artList={artList} username={username} /> : <div />}
-                {username !== "null" ? <OrdersList ordersList={ordersList} username={username} /> : <div />}
-                {userDet?.usertype === 1 ? <DeliveryList deliveryList={deliveryList} /> : <div />}
-            </div>
+                                    <div className="register">
+                                        New to Art Gallery? <span onClick={() => {
+                                            setLoginState(!loginState)
+                                            setErrorMessage("")
+                                        }}>Create Account</span>
+                                    </div>
+                                </motion.div>
+                                : <FadeInBottom children={
+                                    <div className="register-user">
+                                        <div className="register hide-mobile">
+                                            <h3>Why Register?</h3>
+                                            <ul>
+                                                <li>Get unlimited free deliveries.</li>
+                                                <li>Place orders on you favourite Arts.</li>
+                                                <li>Login anywhere.</li>
+                                            </ul>
+                                        </div>
+                                        <div className="place"></div>
+                                        <div className="profile-register">
+                                            <span className="register-head">Register</span>
+                                            <span className="register-message">Please fill in the following details about yourself.</span>
+                                            <hr />
+                                            <span>I am here to</span>
+                                            <div className="user-type">
+                                                <button className={userType === 2 ? "selected" : ""} onClick={() => setUserType(2)}>Buy Art</button>
+                                                <button className={userType === 1 ? "selected" : ""} onClick={() => setUserType(1)}>Sell Art</button>
+                                            </div>
+                                            <span className="user-detail">Name</span>
+                                            <input type="text" name="user-name" id="user-detail-name" onChange={() => handleRegUsernameName()} />
+                                            <span className="user-detail">Username</span>
+                                            <input type="text" name="user-username" id="user-detail-username" onChange={() => handleRegUsername()} />
+                                            <span className="user-detail">Email</span>
+                                            <input type="email" name="user-email" id="user-detail-email" onChange={() => handleRegEmail()} />
+                                            <span className="user-detail">Password</span>
+                                            <input type="password" name="user-password" id="user-detail-password" onChange={() => handleRegPassword()} />
+                                            <button type="submit" className="register-button" onClick={() => handleRegister()}>{regLoading}</button>
+                                        </div>
+                                        <div className="place"></div>
+                                        <div className="register">
+                                            Already have an account? <span onClick={() => {
+                                                setLoginState(!loginState)
+                                                setErrorMessage("")
+                                            }}>Login</span>
+                                        </div>
+                                    </div>
+                                } classname="" />
+                        }
+                        {userDet?.usertype === 1 ? <ArtList artList={artList} username={username} /> : <div />}
+                        {username !== "null" ? <OrdersList ordersList={ordersList} username={username} /> : <div />}
+                        {userDet?.usertype === 1 ? <DeliveryList deliveryList={deliveryList} /> : <div />}
+                    </div> : <AdminPage username={username} handleLogout={() => handleLogout()} />
+            }
             {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
-            {/* {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />} */}
+        </div>
+    )
+}
+
+interface AdminProps {
+    username: string,
+    handleLogout: () => void
+}
+const AdminPage: React.FC<AdminProps> = ({ username, handleLogout }) => {
+    const [users, setUsers] = useState<UserType[]>([])
+    const [art, setArt] = useState<Art[]>([]);
+    const [ordersList, setOrdersList] = useState<Orders[]>([])
+    const [logoutButton, setLogoutButton] = useState<string>('Logout')
+
+    const deleteHandleUser = (username: string) => {
+        deleteUser(username).then((data) => {
+            if (data.username === username)
+                window.location.reload()
+        })
+    }
+    const deleteHandleArt = (username: string, artname: string) => {
+        deleteArt(username, artname).then((data) => {
+            if (data.username === username)
+                window.location.reload()
+        })
+    }
+    const deleteHandleOrder = (username: string, artname: string) => {
+        deleteOrder(username, artname).then((data) => {
+            if (data.username === username)
+                window.location.reload()
+        })
+    }
+    useEffect(() => {
+        allUsers().then((data) => {
+            setUsers(data)
+        })
+        getArt().then((data) => {
+            setArt(data)
+        })
+        allOrders().then((data) => {
+            setOrdersList(data)
+        })
+    }, [])
+    return (
+        <div className="admin-page">
+            <h1>Admin</h1>
+            <h2>{username}</h2>
+            <button onClick={() => { setLogoutButton('Logging Out...'); handleLogout(); setLogoutButton('Logged Out!'); }} className="logout">{logoutButton}</button>
+            <h3>Users</h3>
+            <div className="users">
+                {users.map((user, index) => (
+                    <div className="user-box" key={index}>
+                        <div className="user">
+                            <h4>{user.username}</h4>
+                            <p className="type">{user.usertype === 1 ? "Artist" : "Customer"}</p>
+                            <p>{user.firstname}</p>
+                            <p>{user.email}</p>
+                            <img src={Delete} alt="delete" className="delete" onClick={() => deleteHandleUser(user.username)} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <h3>Art</h3>
+            <div className="artP">
+                {art.map((art, index) => (
+                    <div className="art-box" key={index}>
+                        <div className="arte">
+                            <h4>{art.name}</h4>
+                            <p>${art.price}</p>
+                            <img src={Delete} alt="delete" className="delete" onClick={() => deleteHandleArt(art.artist, art.name)} />
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <h3>Orders</h3>
+            <div className="ordersP">
+                {ordersList.map((order, index) => (
+                    <div className="order-box" key={index}>
+                        <div className="orderP">
+                            <h4>{order.artname}</h4>
+                            <p>At: {order.address}</p>
+                            <p>To: {order.username}</p>
+                            <p>Booked: {order.booked}</p>
+                            <p>Before: {order.due}</p>
+                            <img src={Delete} alt="delete" className="delete" onClick={() => deleteHandleOrder(order.username, order.artname)} />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
@@ -237,6 +328,7 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
                     <div className="user-detail">
                         <h3>{userDet?.firstname}</h3>
                         <h3>{userDet?.email}</h3>
+                        <a href="mailto:nithins674@gmail.com" className="c-admin">Contact admin</a>
                     </div>
                     <div className="user-buttons">
                         {userDet?.usertype === 1 ? <Link to="/create">Create Art</Link> : <span></span>}

@@ -217,6 +217,54 @@ router.post('/user', (req, res, next) => {
     }
 })
 
+router.get('/allusers', (req, res, next) => {
+    db.all('select * from user', (err, rows) => {
+        if (err) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json')
+            console.error(err);
+            return res.send({ "error": "Users not found", "err": err });
+        } else {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json')
+            return res.send(rows)
+        }
+    })
+})
+
+router.post('/deleteuser', (req, res, next) => {
+    const username = req.body.username;
+    if (username !== undefined) {
+        db.run(`delete from user where username="${username}"`, (err) => {
+            if (err) {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json')
+                console.error(err);
+                return res.send({ "error": "Users not found", "err": err });
+            } else {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json')
+                return res.send(req.body)
+            }
+        })
+    }
+})
+
+router.get('/allorders', (req, res, next) => {
+    db.all('select * from orders', (err, rows) => {
+        if (err) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json')
+            console.error(err);
+            return res.send({ "error": "Orders not found", "err": err });
+        } else {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json')
+            return res.send(rows)
+        }
+    })
+})
+
 router.post('/login', (req, res, next) => {
     const username = req.body.username
     console.log("body.username: " + username);

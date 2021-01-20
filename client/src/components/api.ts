@@ -206,3 +206,34 @@ export async function logout() {
         console.error(err)
     }
 }
+
+// Admin API
+
+export async function allUsers() {
+    try {
+        const res = await axios.get(`${endpoint}/api/allusers`)
+        return res.data
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export async function deleteUser(username: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/deleteuser`, {
+            username: username
+        })
+        return res.data
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export async function allOrders() {
+    try {
+        const res = await axios.get(`${endpoint}/api/allorders`)
+        return res.data
+    } catch (err) {
+        console.error(err)
+    }
+}
