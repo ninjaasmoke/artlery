@@ -3,6 +3,7 @@ export interface Art {
     imageurl: string,
     price: number,
     about: string,
+    artist: string,
     rating: number,
     comment: string
 }

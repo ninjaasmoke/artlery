@@ -29,7 +29,7 @@ const Home: React.FC<HomeProps> = () => {
 
     const handleSort = () => {
         // console.log("Handling sort");
-        if (sort === "def") {
+        if (sort === "def" || sort === "Popular") {
             art.sort((a, b) => b.price - a.price)
             setSort('Price')
         } else if (sort === 'Price') {
@@ -47,8 +47,8 @@ const Home: React.FC<HomeProps> = () => {
             })
             setSort('Name Z-A')
         } else {
-            art.sort((a, b) => b.price - a.price)
-            setSort('Price')
+            art.reverse()
+            setSort('Popular')
         }
 
     }
@@ -56,7 +56,7 @@ const Home: React.FC<HomeProps> = () => {
         const username = Cookies.get('username');
         setUsername(username === undefined ? "null" : username)
         getArt().then((data) => {
-            setArt(data)
+            setArt(data.reverse())
         })
     }, [])
     return (

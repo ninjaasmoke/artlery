@@ -738,6 +738,13 @@ nav .placeholder-to-center {
   }
 }
 
+.found-art .art-details .art-artist {
+  padding-top: 0px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #242428;
+}
+
 .found-art .art-details .art-price {
   padding-top: 10px;
   font-size: 16px;

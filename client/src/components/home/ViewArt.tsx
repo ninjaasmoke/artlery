@@ -21,7 +21,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
     const [comment, setComment] = useState<string>('')
     const [Username, setUsername] = useState<string>('')
     const [userRating, setUserRating] = useState<Option>()
-    const [buttonState, setButtonState] = useState<string>('Submit')
+    const [buttonState, setButtonState] = useState<string>('Rate')
 
     const getData = async () => {
         search(match.params.showArt).then((data) => {
@@ -44,12 +44,12 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
     }
 
     const handlePostRating = () => {
-        setButtonState("Submiting...")
+        setButtonState("Rating...")
         postRating(parseInt(userRating?.value === undefined ? "5" : userRating.value), Username, foundArt?.name ?? "").then((res) => {
             // console.log(res);
             window.location.reload()
         })
-        setButtonState("Submit")
+        setButtonState("Rate")
     }
 
     const handlePostComment = () => {
@@ -76,9 +76,9 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         <img alt={foundArt?.name} src={foundArt?.imageurl} className="art-image" />
                         <div className="space-filler"></div>
                         <div className="art-details" >
-                            <div className="art-name"> {foundArt?.name}</div>
+                            <div className="art-name"> {foundArt?.name} <span className="art-artist"> - {foundArt?.artist}</span></div>
                             <div className="art-about"> {foundArt?.about !== null ? foundArt?.about : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem sed tenetur illo, magnam accusamus tempora doloremque modi, odio, earum sunt quas quisquam quae nesciunt ducimus ullam eligendi quos cupiditate."}</div>
-                            {/* <div className="art-rating">Rating: {rating}</div> */}
+                            {/* <div className="art-artist">{foundArt?.artist}</div> */}
                             <div className="art-price">Price: ${foundArt?.price}</div>
                             <div className="art-buttons">
                                 <Link to={{
@@ -113,7 +113,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         ))}
                         <h3>Add Comment</h3>
                         <textarea name="comment" id="user-comment" onChange={() => handleComment()}></textarea>
-                        <button onClick={() => handlePostComment()}>Submit</button>
+                        <button onClick={() => handlePostComment()}>Comment</button>
                     </div> : <span></span>
             } classname="" />
         </div>
