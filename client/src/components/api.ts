@@ -27,6 +27,40 @@ export async function search(searchText: string) {
     }
 }
 
+export async function getRating(artname: string) {
+    try {
+        const { data } = await axios.get(`${endpoint}/api/getrating/${artname}`)
+        if (data.length === 0)
+            return 5;
+        const avg = data.reduce((total: any, next: { rating: any; }) => total + next.rating, 0) / data.length
+        const avgLimit = Math.floor(avg * 100) / 100
+        return avgLimit.toFixed(2)
+    } catch (err) {
+        console.error(err);
+        return null
+    }
+}
+
+export async function postRating(rating: number, username: string, artname: string) {
+    try {
+        axios.get(`${endpoint}/api/getratingid`).then(async function (resp) {
+            const maxVal = Math.max(...resp.data.map((o: { rating_id: any; }) => o.rating_id), 0)
+            console.log(maxVal);
+            const { data } = await axios.post(`${endpoint}/api/postrating/`, {
+                "rating": rating,
+                "username": username,
+                "artname": artname,
+                "id": maxVal + 1
+            })
+            return data
+        })
+
+    } catch (err) {
+        console.error(err);
+        return null
+    }
+}
+
 export async function getUser(username: string) {
     try {
         const res = await axios.post(`${endpoint}/api/user`, { username: username })

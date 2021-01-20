@@ -819,6 +819,116 @@ nav .placeholder-to-center {
   color: #242428;
 }
 
+.art-rating {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.art-rating .arrow-open, .art-rating .arrow-closed {
+  border: solid #999;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  position: absolute;
+  right: 10px;
+}
+
+.art-rating .arrow-closed {
+  top: 10px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.art-rating .arrow-open {
+  top: 14px;
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+}
+
+.art-rating .Dropdown-root {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.art-rating .Dropdown-control {
+  padding: 4px 12px;
+  text-align: center;
+  margin: 2px 0;
+  min-width: 80px;
+  background-color: #f9f9f9;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(72, 72, 77, 0.1);
+          box-shadow: 0px 0px 10px 1px rgba(72, 72, 77, 0.1);
+  cursor: pointer;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.art-rating .Dropdown-menu {
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  width: 80px;
+  background-color: #f0f0f0;
+}
+
+.art-rating .Dropdown-menu .Dropdown-option {
+  padding: 4px 12px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  margin: 4px 0;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.art-rating .Dropdown-menu .Dropdown-option:hover {
+  background-color: #ef9f4f;
+}
+
+.art-rating span {
+  color: #e7a11f;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.art-rating button {
+  width: 120px;
+  border: none;
+  margin-top: 24px;
+  padding: 10px 12px;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  font-weight: 700;
+  font-family: 'Poppins';
+  cursor: pointer;
+  background-color: #ef9f4f;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  color: #242428;
+}
+
+.art-rating button:hover {
+  background-image: none;
+  background-color: #f9f9f9;
+  color: #ef9f4f;
+}
+
 .view-art {
   width: 100vw;
 }

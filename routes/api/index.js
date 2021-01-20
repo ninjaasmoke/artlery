@@ -45,6 +45,64 @@ router.get('/search/:name', (req, res, next) => {
     })
 })
 
+router.get('/getrating/:artname', (req, res, next) => {
+    db.all('SELECT rating FROM rating WHERE artname = ?', [req.params.artname], (err, row) => {
+        if (!err) {
+            if (row) {
+                res.statusCode = 200
+                return res.send(row)
+            } else {
+                res.statusCode = 404
+                return res.json({})
+            }
+        } else {
+            res.statusCode = 200
+            return res.send({ "error": "Internal error", "err": err })
+        }
+    })
+})
+
+router.get('/getratingid', (req, res, next) => {
+    db.all('select rating_id from rating', [], (err, rows) => {
+        if (err) {
+            res.status = 200;
+            res.setHeader('Content-Type', 'application/json')
+            console.error(err);
+            return res.json({ "error": "Some internal error", "err": err });
+        } else {
+            res.status = 200;
+            res.setHeader('Content-Type', 'application/json')
+            console.log(rows);
+            return res.send(rows)
+        }
+    })
+})
+
+router.post('/postrating', (req, res, next) => {
+    const rating = req.body.rating
+    const artname = req.body.artname
+    const username = req.body.username
+    const id = req.body.id
+    if (rating !== undefined && username !== undefined && artname !== undefined) {
+        db.run(`INSERT INTO rating(artname, username, rating, rating_id) values ("${artname}", "${username}", ${rating}, ${id})`, [], (err) => {
+            if (err) {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json')
+                console.error(err);
+                return res.json({ "error": "Some internal error", "err": err });
+            } else {
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json');
+                return res.send(req.body)
+            }
+        })
+    } else {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json')
+        res.send({ "error": "Fill all details!" })
+    }
+})
+
 router.get('/orders')
 
 router.post('/user', (req, res, next) => {
