@@ -163,7 +163,28 @@ router.post('/postcomment', (req, res, next) => {
     }
 })
 
-router.get('/orders')
+router.get('/deliveries/:artist', (req, res, next) => {
+    const artist = req.params.artist;
+    if (artist !== undefined)
+        db.all(`select o.* from orders o, art a where a.name = o.artname and a.artist="${artist}"`, (err, rows) => {
+            if (err) {
+                res.statusCode = 200;
+                console.error(err);
+                res.setHeader('Content-Type', 'application/json')
+                return res.send({ "error": "Some internal error", "err": err });
+            } else {
+                res.status = 200;
+                res.setHeader('Content-Type', 'application/json')
+                // console.log(rows);
+                return res.send(rows)
+            }
+        })
+    else {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json')
+        return res.send({ "error": "Fill all details!" })
+    }
+})
 
 router.post('/user', (req, res, next) => {
     const username = req.body.username

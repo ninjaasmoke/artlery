@@ -104,6 +104,16 @@ export async function getUser(username: string) {
     }
 }
 
+export async function getDeliveries(artist: string) {
+    try {
+        const res = await axios.get(`${endpoint}/api/deliveries/${artist}`)
+        return res.data
+    } catch (err) {
+        console.log(err);
+        return null
+    }
+}
+
 export async function getOrderList(username: string) {
     try {
         const res = await axios.post(`${endpoint}/api/listorders`, { username: username })

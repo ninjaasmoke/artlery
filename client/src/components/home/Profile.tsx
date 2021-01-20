@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { getOrderList, getpostedart, getUser, login, logout, register } from '../api'
+import { getDeliveries, getOrderList, getpostedart, getUser, login, logout, register } from '../api'
 // import {  useHistory } from 'react-router-dom'
 import { Art, Orders, UserType } from '../ContextTypes'
 import FadeInTop from './animation/FadeInAnim'
@@ -19,6 +19,7 @@ const Profile: React.FC<ProfileProps> = () => {
     const [regLoading, setRegLoading] = useState<string>("Register")
     const [userDet, setUserDet] = useState<UserType>();
     const [ordersList, setOrdersList] = useState([])
+    const [deliveryList, setDeliveryList] = useState([])
     const [artList, setArtList] = useState([])
     // const history = useHistory()
 
@@ -130,6 +131,10 @@ const Profile: React.FC<ProfileProps> = () => {
             getOrderList(res?.data.username).then((data) => {
                 setOrdersList(data)
             })
+            getDeliveries(username).then((data) => {
+                if (data.length !== 0)
+                    setDeliveryList(data.reverse());
+            })
         })
         // console.log(username);
     }, [])
@@ -203,6 +208,7 @@ const Profile: React.FC<ProfileProps> = () => {
                 }
                 {userDet?.usertype === 1 ? <ArtList artList={artList} /> : <div />}
                 {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
+                {userDet?.usertype === 1 ? <DeliveryList deliveryList={deliveryList} /> : <div />}
             </div>
             {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
             {/* {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />} */}
@@ -247,7 +253,7 @@ interface ArtListProps {
 const ArtList: React.FC<ArtListProps> = ({ artList }) => {
     return (
         <div className="orders-list">
-            <h2>Uploads</h2>
+            <h2>Your Uploads</h2>
             {artList !== undefined && artList !== null && artList.length !== 0 ?
                 artList?.map((art, index) => (
                     <motion.div key={index}
@@ -276,7 +282,7 @@ const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
         <div
             className="orders-list"
         >
-            <h2>Orders</h2>
+            <h2>Your Orders</h2>
             {ordersList !== undefined && ordersList !== null && ordersList.length !== 0 ?
                 ordersList?.map((order, index) => (
                     <motion.div key={index}
@@ -285,6 +291,34 @@ const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
                         transition={{ ease: "easeOut", duration: .2 }}
                     >
                         <h3>{order.artname}</h3>
+                        <span>Delivery at: {order.address}</span>
+                        <span>Due: {order.due}</span>
+                        <span>Booked: {order.booked}</span>
+                    </motion.div>
+                ))
+                : <ErrorBig errorMsg="No Orders Yet" />}
+        </div>
+    )
+}
+
+interface DeliveryProp {
+    deliveryList: Orders[],
+}
+const DeliveryList: React.FC<DeliveryProp> = ({ deliveryList }) => {
+    return (
+        <div
+            className="orders-list"
+        >
+            <h2>Your Deliveries</h2>
+            {deliveryList !== undefined && deliveryList !== null && deliveryList.length !== 0 ?
+                deliveryList?.map((order, index) => (
+                    <motion.div key={index}
+                        initial={{ scaleY: .1 }}
+                        animate={{ scaleY: 1 }}
+                        transition={{ ease: "easeOut", duration: .2 }}
+                    >
+                        <h3>{order.artname}</h3>
+                        <span>Delivery to: {order.username}</span>
                         <span>Delivery at: {order.address}</span>
                         <span>Due: {order.due}</span>
                         <span>Booked: {order.booked}</span>
