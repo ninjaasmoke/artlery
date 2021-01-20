@@ -619,7 +619,7 @@ nav {
 }
 
 .art-rating {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -646,7 +646,7 @@ nav {
     .Dropdown-root {
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .Dropdown-control {
@@ -676,9 +676,63 @@ nav {
         }
     }
     span {
-        color: $accent3Color;
+        color: $accent2Color;
         font-size: 24px;
         font-weight: 700;
+    }
+    button {
+        width: 120px;
+        border: none;
+        margin-top: 24px;
+        padding: 10px 12px;
+        border-radius: 100px;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        font-weight: 700;
+        font-family: 'Poppins';
+        cursor: pointer;
+        background-color: $accent2Color;
+        transition-duration: 300ms;
+        color: $accentColor;
+
+        &:hover {
+            background-image: none;
+            background-color: $primColor;
+            color: $accent2Color;
+        }
+    }
+}
+
+.art-comments {
+    padding: 20px;
+    h2 {
+        color: $accent2Color;
+        font-size: 24px;
+    }
+    h3 {
+        margin-top: 12px;
+    }
+    .comment {
+        width: 100%;
+        background-color: #f0f0f0;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        h4 {
+            font-size: 16px;
+            margin-top: 4px;
+        }
+        margin-top: 3px;
+    }
+    textarea {
+        width: 100%;
+        padding: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        border: none;
+        outline: none;
+        background-color: #f0f0f0;
     }
     button {
         width: 120px;

@@ -61,6 +61,38 @@ export async function postRating(rating: number, username: string, artname: stri
     }
 }
 
+export async function getComments(artname: string) {
+    try {
+        const { data } = await axios.get(`${endpoint}/api/getcomment/${artname}`)
+        if (data.length === 0) return []
+        return data
+    } catch (err) {
+        console.log(err);
+        return []
+    }
+}
+
+export async function postComment(comment: string, username: string, artname: string) {
+    try {
+        axios.get(`${endpoint}/api/getcommentid`).then(async function (resp) {
+            const maxVal = Math.max(...resp.data.map((o: { comment_id: any; }) => o.comment_id), 0)
+            console.log(maxVal);
+            const { data } = await axios.post(`${endpoint}/api/postcomment`, {
+                "comment": comment,
+                "artname": artname,
+                "username": username,
+                "id": maxVal + 1
+            })
+            console.log(data);
+            return data
+        })
+
+    } catch (err) {
+        console.error(err);
+        return null
+    }
+}
+
 export async function getUser(username: string) {
     try {
         const res = await axios.post(`${endpoint}/api/user`, { username: username })

@@ -820,9 +820,9 @@ nav .placeholder-to-center {
 }
 
 .art-rating {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -860,9 +860,9 @@ nav .placeholder-to-center {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
 .art-rating .Dropdown-control {
@@ -900,7 +900,7 @@ nav .placeholder-to-center {
 }
 
 .art-rating span {
-  color: #e7a11f;
+  color: #ef9f4f;
   font-size: 24px;
   font-weight: 700;
 }
@@ -924,6 +924,67 @@ nav .placeholder-to-center {
 }
 
 .art-rating button:hover {
+  background-image: none;
+  background-color: #f9f9f9;
+  color: #ef9f4f;
+}
+
+.art-comments {
+  padding: 20px;
+}
+
+.art-comments h2 {
+  color: #ef9f4f;
+  font-size: 24px;
+}
+
+.art-comments h3 {
+  margin-top: 12px;
+}
+
+.art-comments .comment {
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.art-comments .comment h4 {
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.art-comments textarea {
+  width: 100%;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: #f0f0f0;
+}
+
+.art-comments button {
+  width: 120px;
+  border: none;
+  margin-top: 24px;
+  padding: 10px 12px;
+  border-radius: 100px;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  font-weight: 700;
+  font-family: 'Poppins';
+  cursor: pointer;
+  background-color: #ef9f4f;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+  color: #242428;
+}
+
+.art-comments button:hover {
   background-image: none;
   background-color: #f9f9f9;
   color: #ef9f4f;

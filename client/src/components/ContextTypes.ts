@@ -15,6 +15,11 @@ export interface Orders {
     due: string;
 }
 
+export interface Comments {
+    username: string;
+    comment: string;
+}
+
 export type UserType = {
     email: string;
     firstname: string;
