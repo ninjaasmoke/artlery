@@ -34,7 +34,7 @@ export async function getRating(artname: string) {
             return 5;
         const avg = data.reduce((total: any, next: { rating: any; }) => total + next.rating, 0) / data.length
         const avgLimit = Math.floor(avg * 100) / 100
-        return avgLimit.toFixed(2)
+        return avgLimit.toFixed(1)
     } catch (err) {
         console.error(err);
         return null
@@ -147,6 +147,30 @@ export async function placeOrder(order: Orders) {
             { username: order.username, artname: order.artname, address: order.address, booked: order.booked, due: order.due })
         // console.log(res.data);
 
+        return res.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function deleteOrder(username: string, artname: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/deleteorder`, {
+            username: username,
+            artname: artname
+        })
+        return res.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function deleteArt(username: string, artname: string) {
+    try {
+        const res = await axios.post(`${endpoint}/api/deleteart`, {
+            username: username,
+            artname: artname
+        })
         return res.data
     } catch (error) {
         console.error(error);

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { getDeliveries, getOrderList, getpostedart, getUser, login, logout, register } from '../api'
+import { deleteArt, deleteOrder, getDeliveries, getOrderList, getpostedart, getUser, login, logout, register } from '../api'
 // import {  useHistory } from 'react-router-dom'
 import { Art, Orders, UserType } from '../ContextTypes'
 import FadeInTop from './animation/FadeInAnim'
 import ErrorBig from './Error'
 import FadeInBottom from './animation/FadeInBottom'
 import { Link } from 'react-router-dom'
-// import { UserType } from '../ContextTypes'
+import Delete from '../resource/delete.png'
+
+
 const Cookies = require('js-cookie')
 
 interface ProfileProps { }
@@ -206,8 +208,8 @@ const Profile: React.FC<ProfileProps> = () => {
                             </div>
                         } classname="" />
                 }
-                {userDet?.usertype === 1 ? <ArtList artList={artList} /> : <div />}
-                {username !== "null" ? <OrdersList ordersList={ordersList} /> : <div />}
+                {userDet?.usertype === 1 ? <ArtList artList={artList} username={username} /> : <div />}
+                {username !== "null" ? <OrdersList ordersList={ordersList} username={username} /> : <div />}
                 {userDet?.usertype === 1 ? <DeliveryList deliveryList={deliveryList} /> : <div />}
             </div>
             {errorMessage.length !== 0 ? <div className="error-message">{errorMessage}</div> : <span></span>}
@@ -248,55 +250,80 @@ const UserDetail: React.FC<UserDetailProps> = ({ username, userDet, handleLogout
 }
 
 interface ArtListProps {
-    artList: Art[]
+    artList: Art[],
+    username: string
 }
-const ArtList: React.FC<ArtListProps> = ({ artList }) => {
+const ArtList: React.FC<ArtListProps> = ({ artList, username }) => {
+
+    const handleDeleteArt = (artname: string) => {
+        deleteArt(username, artname).then((res) => {
+            if (res.username == username)
+                window.location.reload()
+        })
+    }
     return (
         <div className="orders-list">
             <h2>Your Uploads</h2>
-            {artList !== undefined && artList !== null && artList.length !== 0 ?
-                artList?.map((art, index) => (
-                    <motion.div key={index}
-                        initial={{ scaleY: .1 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ ease: "easeOut", duration: .2 }}
-                    >
-                        <Link to={{
-                            pathname: "/view/" + art.name
-                        }}>View</Link>
-                        <h3>{art.name}</h3>
-                        <span>{art.about}</span>
-                        <span className="price">${art.price}</span>
-                    </motion.div>
-                ))
-                : <ErrorBig errorMsg="No Uploads Yet" />}
+            <div className="list">
+                {artList !== undefined && artList !== null && artList.length !== 0 ?
+                    artList?.map((art, index) => (
+                        <motion.div key={index}
+                            className="list-item"
+                            initial={{ scaleY: .1 }}
+                            animate={{ scaleY: 1 }}
+                            transition={{ ease: "easeOut", duration: .2 }}
+                        >
+                            <Link to={{
+                                pathname: "/view/" + art.name
+                            }}>View</Link>
+                            <h3>{art.name}</h3>
+                            <span>{art.about}</span>
+                            <span className="price">${art.price}</span>
+                            <img src={Delete} alt="delete" className="delete" onClick={() => handleDeleteArt(art.name)} />
+                        </motion.div>
+                    ))
+                    : <ErrorBig errorMsg="No Uploads Yet" />}
+            </div>
         </div>
     )
 }
 
 interface OrderProp {
     ordersList: Orders[],
+    username: string
 }
-const OrdersList: React.FC<OrderProp> = ({ ordersList }) => {
+const OrdersList: React.FC<OrderProp> = ({ ordersList, username }) => {
+
+    const handleDeleteOrder = (artname: string) => {
+        deleteOrder(username, artname).then((res) => {
+            if (res.username == username)
+                window.location.reload()
+        })
+    }
+
     return (
         <div
             className="orders-list"
         >
             <h2>Your Orders</h2>
-            {ordersList !== undefined && ordersList !== null && ordersList.length !== 0 ?
-                ordersList?.map((order, index) => (
-                    <motion.div key={index}
-                        initial={{ scaleY: .1 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ ease: "easeOut", duration: .2 }}
-                    >
-                        <h3>{order.artname}</h3>
-                        <span>Delivery at: {order.address}</span>
-                        <span>Due: {order.due}</span>
-                        <span>Booked: {order.booked}</span>
-                    </motion.div>
-                ))
-                : <ErrorBig errorMsg="No Orders Yet" />}
+            <div className="list">
+                {ordersList !== undefined && ordersList !== null && ordersList.length !== 0 ?
+                    ordersList?.map((order, index) => (
+                        <motion.div key={index}
+                            className="list-item"
+                            initial={{ scaleY: .1 }}
+                            animate={{ scaleY: 1 }}
+                            transition={{ ease: "easeOut", duration: .2 }}
+                        >
+                            <h3>{order.artname}</h3>
+                            <span>Delivery at: {order.address}</span>
+                            <span>Due: {order.due}</span>
+                            <span>Booked: {order.booked}</span>
+                            <img src={Delete} alt="delete" className="delete" onClick={() => handleDeleteOrder(order.artname)} />
+                        </motion.div>
+                    ))
+                    : <ErrorBig errorMsg="No Orders Yet" />}
+            </div>
         </div>
     )
 }
@@ -310,21 +337,24 @@ const DeliveryList: React.FC<DeliveryProp> = ({ deliveryList }) => {
             className="orders-list"
         >
             <h2>Your Deliveries</h2>
-            {deliveryList !== undefined && deliveryList !== null && deliveryList.length !== 0 ?
-                deliveryList?.map((order, index) => (
-                    <motion.div key={index}
-                        initial={{ scaleY: .1 }}
-                        animate={{ scaleY: 1 }}
-                        transition={{ ease: "easeOut", duration: .2 }}
-                    >
-                        <h3>{order.artname}</h3>
-                        <span>Delivery to: {order.username}</span>
-                        <span>Delivery at: {order.address}</span>
-                        <span>Due: {order.due}</span>
-                        <span>Booked: {order.booked}</span>
-                    </motion.div>
-                ))
-                : <ErrorBig errorMsg="No Orders Yet" />}
+            <div className="list">
+                {deliveryList !== undefined && deliveryList !== null && deliveryList.length !== 0 ?
+                    deliveryList?.map((order, index) => (
+                        <motion.div key={index}
+                            className="list-item"
+                            initial={{ scaleY: .1 }}
+                            animate={{ scaleY: 1 }}
+                            transition={{ ease: "easeOut", duration: .2 }}
+                        >
+                            <h3>{order.artname}</h3>
+                            <span>Delivery to: {order.username}</span>
+                            <span>Delivery at: {order.address}</span>
+                            <span>Due: {order.due}</span>
+                            <span>Booked: {order.booked}</span>
+                        </motion.div>
+                    ))
+                    : <ErrorBig errorMsg="No Bookings Yet" />}
+            </div>
         </div>
     )
 }

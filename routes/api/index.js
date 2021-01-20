@@ -383,6 +383,26 @@ router.post('/placeorder', (req, res, next) => {
     }
 })
 
+router.post('/deleteorder', (req, res, next) => {
+    const username = req.body.username;
+    const artname = req.body.artname;
+    if (username !== undefined && artname !== undefined)
+        db.run(`delete from orders where username="${username}" and artname="${artname}"`, (err) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                return res.json({ "error": "Internal database error", "err": err });
+            } else {
+                res.status = 200;
+                return res.send(req.body);
+            }
+        })
+    else {
+        res.status = 200;
+        return res.send({ "error": "Enter all details!" });
+    }
+})
+
 router.post('/getpostedart', (req, res, next) => {
     const username = req.body.username;
     if (username !== undefined) {
@@ -398,6 +418,26 @@ router.post('/getpostedart', (req, res, next) => {
                 return res.send(rows);
             }
         })
+    }
+})
+
+router.post('/deleteart', (req, res, next) => {
+    const username = req.body.username;
+    const artname = req.body.artname;
+    if (username !== undefined && artname !== undefined)
+        db.run(`delete from art where artist="${username}" and name="${artname}"`, (err) => {
+            if (err) {
+                console.error(err);
+                res.status = 200;
+                return res.json({ "error": "Internal database error", "err": err });
+            } else {
+                res.status = 200;
+                return res.send(req.body);
+            }
+        })
+    else {
+        res.status = 200;
+        return res.send({ "error": "Enter all details!" });
     }
 })
 
