@@ -1557,7 +1557,7 @@ nav .placeholder-to-center {
 
 .profile-card-holder .orders-list .list .list-item .delete, .profile-card-holder .orders-list .list .list-item .delete-art {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 10px;
   height: 16px;
   cursor: pointer;
@@ -1566,7 +1566,8 @@ nav .placeholder-to-center {
 }
 
 .profile-card-holder .orders-list .list .list-item .delete:hover, .profile-card-holder .orders-list .list .list-item .delete-art:hover {
-  background-color: rgba(255, 87, 87, 0.4);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .profile-card-holder .orders-list .list .list-item .delete-art {

@@ -1220,14 +1220,15 @@ nav {
 
                 .delete, .delete-art {
                     position: absolute;
-                    top: 10px;
+                    top: 12px;
                     right: 10px;
                     height: 16px;
                     cursor: pointer;
                     transition-duration: 300ms;
                     // border-radius: 0%;
                     &:hover {
-                        background-color: rgba($color: $errorBorder, $alpha: 0.4);
+                        // background-color: rgba($color: $errorBorder, $alpha: 0.1);
+                        transform: scale(1.1);
                     }
                 }
                 
