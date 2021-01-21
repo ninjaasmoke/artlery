@@ -12,9 +12,11 @@ const Nav: React.FC<NavProp> = () => {
     const history = useHistory();
     const [showBack, setShowBack] = useState<boolean>(false)
     const [navShadow, setNavShadow] = useState<string>('')
+    const [pathName, setPathname] = useState<string>('')
 
     useEffect(() => {
         history.listen(({ pathname }) => {
+            setPathname(pathname)
             if (pathname !== '/home') {
                 setShowBack(true)
             } else {
@@ -57,7 +59,7 @@ const Nav: React.FC<NavProp> = () => {
                     <NavLink to="/search" label="Search" toggle={() => { }} />
                     {/* <NavLink to="/orders" label="Orders" toggle={() => { }} /> */}
                     <Link to="/profile" >
-                        <img src={User} alt="" />
+                        <img src={User} alt="" className={pathName === '/profile' ? "color-bg" : ""} />
                     </Link>
                 </div>
                 <div className={toggle} onClick={() => toggleNav()}>

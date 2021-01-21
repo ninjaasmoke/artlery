@@ -103,6 +103,10 @@ nav .links img:hover {
   background-color: rgba(239, 159, 79, 0.7);
 }
 
+nav .links .color-bg {
+  background-color: rgba(239, 159, 79, 0.7);
+}
+
 @media (max-width: 767px) {
   nav .links {
     display: none;

@@ -82,6 +82,10 @@ nav {
             }
         }
 
+        .color-bg {
+            background-color: rgba($color: $accent2Color, $alpha: 0.7);
+        }
+
         @media (max-width: 767px) {
             display: none;
         }
