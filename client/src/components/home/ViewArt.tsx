@@ -21,6 +21,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
     const [comment, setComment] = useState<string>('')
     const [Username, setUsername] = useState<string>('')
     const [userRating, setUserRating] = useState<Option>()
+    const [Rate, setRate] = useState<number>(0)
     const [buttonState, setButtonState] = useState<string>('Rate')
 
     const getData = async () => {
@@ -45,7 +46,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
 
     const handlePostRating = () => {
         setButtonState("Rating...")
-        postRating(parseInt(userRating?.value === undefined ? "5" : userRating.value), Username, foundArt?.name ?? "").then((res) => {
+        postRating(Rate, Username, foundArt?.name ?? "").then((res) => {
             window.location.reload()
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })
         })
@@ -91,12 +92,19 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                 </div>} classname="" />
             <FadeInBottom children={
                 Username !== "null" ?
-                    <div className="art-rating">
+                    <div className="art-ratingViewArt">
                         <span>Rating: {rating}</span>
                         <div>Rate this item</div>
-                        <ReactDropdown
-                            options={options} value={defOption} placeholder="Rate this item" onChange={(option) => { setUserRating(option) }} />
-                        <button onClick={() => handlePostRating()}>{buttonState}</button>
+                        {/* <ReactDropdown
+                            options={options} value={defOption} placeholder="Rate this item" onChange={(option) => { setUserRating(option) }} /> */}
+                        <div className="rating-buttons">
+                            <div className={Rate === 1 ? "rate-button rate-select" : "rate-button"} onClick={() => setRate(1)}>1</div>
+                            <div className={Rate === 2 ? "rate-button rate-select" : "rate-button"} onClick={() => setRate(2)}>2</div>
+                            <div className={Rate === 3 ? "rate-button rate-select" : "rate-button"} onClick={() => setRate(3)}>3</div>
+                            <div className={Rate === 4 ? "rate-button rate-select" : "rate-button"} onClick={() => setRate(4)}>4</div>
+                            <div className={Rate === 5 ? "rate-button rate-select" : "rate-button"} onClick={() => setRate(5)}>5</div>
+                        </div>
+                        {Rate !== 0 ? <button onClick={() => handlePostRating()}>{buttonState}</button> : <span></span>}
                     </div> : <span></span>
             } classname="" />
             <FadeInBottom children={
@@ -111,7 +119,7 @@ const ViewArt = ({ match }: RouteComponentProps<ViewArtProps>) => {
                         ))}
                         <h3>Add Comment</h3>
                         <textarea name="comment" id="user-comment" onChange={() => handleComment()}></textarea>
-                        <button onClick={() => handlePostComment()}>Comment</button>
+                        {comment.length >= 10 ? <button onClick={() => handlePostComment()}>Comment</button> : <span />}
                     </div> : <span></span>
             } classname="" />
         </div>

@@ -826,7 +826,7 @@ nav .placeholder-to-center {
   color: #242428;
 }
 
-.art-rating {
+.art-ratingViewArt {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
@@ -841,11 +841,60 @@ nav .placeholder-to-center {
   position: relative;
 }
 
-.art-rating div {
+.art-ratingViewArt div {
   font-size: 14px;
 }
 
-.art-rating .arrow-open, .art-rating .arrow-closed {
+.art-ratingViewArt .rating-buttons {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px 4px;
+}
+
+@media (max-width: 767px) {
+  .art-ratingViewArt .rating-buttons {
+    width: 100%;
+  }
+}
+
+.art-ratingViewArt .rating-buttons .rate-button {
+  border-radius: 12px;
+  width: 40px;
+  height: 20px;
+  text-align: center;
+  background-color: #f0f0f0;
+  color: #242428;
+  cursor: pointer;
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.art-ratingViewArt .rating-buttons .rate-button:hover {
+  background-color: rgba(239, 159, 79, 0.6);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.art-ratingViewArt .rating-buttons .rate-select {
+  background-color: #ef9f4f;
+}
+
+.art-ratingViewArt .rating-buttons .rate-select:hover {
+  background-color: #ef9f4f;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.art-ratingViewArt .arrow-open, .art-ratingViewArt .arrow-closed {
   border: solid #999;
   border-width: 0 2px 2px 0;
   display: inline-block;
@@ -854,19 +903,19 @@ nav .placeholder-to-center {
   right: 10px;
 }
 
-.art-rating .arrow-closed {
+.art-ratingViewArt .arrow-closed {
   top: 10px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
 }
 
-.art-rating .arrow-open {
+.art-ratingViewArt .arrow-open {
   top: 14px;
   -webkit-transform: rotate(-135deg);
           transform: rotate(-135deg);
 }
 
-.art-rating .Dropdown-root {
+.art-ratingViewArt .Dropdown-root {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -876,7 +925,7 @@ nav .placeholder-to-center {
           justify-content: flex-start;
 }
 
-.art-rating .Dropdown-control {
+.art-ratingViewArt .Dropdown-control {
   padding: 4px 12px;
   text-align: center;
   margin: 2px 0;
@@ -889,14 +938,14 @@ nav .placeholder-to-center {
           transition-duration: 300ms;
 }
 
-.art-rating .Dropdown-menu {
+.art-ratingViewArt .Dropdown-menu {
   -webkit-transition-duration: 300ms;
           transition-duration: 300ms;
   width: 80px;
   background-color: #f0f0f0;
 }
 
-.art-rating .Dropdown-menu .Dropdown-option {
+.art-ratingViewArt .Dropdown-menu .Dropdown-option {
   padding: 4px 12px;
   text-align: center;
   cursor: pointer;
@@ -906,17 +955,17 @@ nav .placeholder-to-center {
           transition-duration: 300ms;
 }
 
-.art-rating .Dropdown-menu .Dropdown-option:hover {
+.art-ratingViewArt .Dropdown-menu .Dropdown-option:hover {
   background-color: #ef9f4f;
 }
 
-.art-rating span {
+.art-ratingViewArt span {
   color: #ef9f4f;
   font-size: 24px;
   font-weight: 700;
 }
 
-.art-rating button {
+.art-ratingViewArt button {
   width: 120px;
   border: none;
   margin-top: 24px;
@@ -934,7 +983,7 @@ nav .placeholder-to-center {
   color: #242428;
 }
 
-.art-rating button:hover {
+.art-ratingViewArt button:hover {
   background-image: none;
   background-color: #f9f9f9;
   color: #ef9f4f;

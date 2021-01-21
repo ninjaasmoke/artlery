@@ -626,7 +626,7 @@ nav {
     }
 }
 
-.art-rating {
+.art-ratingViewArt {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
@@ -635,6 +635,43 @@ nav {
 
     div {
         font-size: 14px;
+    }
+
+    .rating-buttons {
+        width: 40%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 4px;
+
+        @media (max-width: 767px) {
+            width:100%
+        }
+
+        .rate-button {
+            border-radius: 12px;
+            width: 40px;
+            height: 20px;
+            text-align: center;
+            // margin-left: 4px;
+            background-color: $grey;
+            color: $accentColor;
+            cursor: pointer;
+            transition-duration: 300ms;
+
+            &:hover {
+                background-color: rgba($color: $accent2Color, $alpha: 0.6);
+                transform: scale(1.1);
+            }
+        }
+
+        .rate-select {
+            background-color: $accent2Color;
+            &:hover {
+                background-color: $accent2Color;
+                transform: scale(1.1);
+            }
+        }
     }
 
     .arrow-open, .arrow-closed {
