@@ -1778,6 +1778,19 @@ nav .placeholder-to-center {
   background-color: rgba(255, 87, 87, 0.2);
 }
 
+@media (min-width: 767px) {
+  .admin-page .users .user-box .user {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-page .users .user-box {
+    width: 100%;
+    padding: 8px;
+  }
+}
+
 .admin-page .artP {
   width: 100%;
 }
@@ -1823,6 +1836,13 @@ nav .placeholder-to-center {
   background-color: rgba(255, 87, 87, 0.2);
 }
 
+@media (max-width: 767px) {
+  .admin-page .artP .art-box {
+    width: 100%;
+    padding: 8px;
+  }
+}
+
 .admin-page .ordersP {
   width: 100%;
 }
@@ -1865,6 +1885,13 @@ nav .placeholder-to-center {
 
 .admin-page .ordersP .order-box .orderP .delete:hover {
   background-color: rgba(255, 87, 87, 0.2);
+}
+
+@media (max-width: 767px) {
+  .admin-page .ordersP .order-box {
+    width: 100%;
+    padding: 8px;
+  }
 }
 
 .error-message {

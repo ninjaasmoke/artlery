@@ -267,15 +267,17 @@ const AdminPage: React.FC<AdminProps> = ({ username, handleLogout }) => {
             <h3>Users</h3>
             <div className="users">
                 {users.map((user, index) => (
-                    <div className="user-box" key={index}>
-                        <div className="user">
-                            <h4>{user.username}</h4>
-                            <p className="type">{user.usertype === 1 ? "Artist" : "Customer"}</p>
-                            <p>{user.firstname}</p>
-                            <p>{user.email}</p>
-                            <img src={Delete} alt="delete" className="delete" onClick={() => deleteHandleUser(user.username)} />
+                    user.usertype !== 0 ?
+                        <div className="user-box" key={index}>
+                            <div className="user">
+                                <h4>{user.username}</h4>
+                                <p className="type">{user.usertype === 1 ? "Artist" : "Customer"}</p>
+                                <p>{user.firstname}</p>
+                                <p>{user.email}</p>
+                                <img src={Delete} alt="delete" className="delete" onClick={() => deleteHandleUser(user.username)} />
+                            </div>
                         </div>
-                    </div>
+                        : <span />
                 ))}
             </div>
             <h3>Art</h3>
