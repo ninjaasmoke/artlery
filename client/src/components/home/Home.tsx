@@ -121,7 +121,7 @@ const HomeComp: React.FC<HomeCompProp> = ({ art, username, sort, handleSort }) =
                                 <img src={artVal.imageurl} alt={artVal.name} className="art-image" />
                                 <div className="img-data-bg">
                                     <div className="img-data">
-                                        {artVal.name}
+                                        <p className="img-name">{artVal.name}</p>
                                     </div>
                                 </div>
                             </div>

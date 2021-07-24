@@ -376,9 +376,13 @@ nav {
     
     
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
+        grid-template-columns: auto auto auto;
+    }
+
+    @media (max-width: 768px) {
         padding: 0;
         padding-top: 28px;
         grid-template-columns: auto auto;
@@ -389,8 +393,12 @@ nav {
     }
 }
 
+@keyframes artanim {
+    0% {bottom: -20px; opacity: 0;}
+    100% {bottom: 0; opacity: 1;}
+}
+
 .art-post {
-    float: left;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -398,26 +406,6 @@ nav {
 
     border-radius: 8px;
     overflow: hidden;
-    // @media (min-width: 1200px) {
-    //     width: 20%;
-    //     height: 280px;
-    // }
-    // @media (max-width: 1199px) {
-    //     width: 25%;
-    //     height: 250px;
-    // }
-    // @media (max-width: 767px) {
-    //     width: 33.33%;
-    //     height: 200px;
-    // }
-    // @media (max-width: 576px) {
-    //     width: 33.33;
-    //     height: 120px;
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
-    // }
     
     .art-image {
         transition: 400ms ease-out;
@@ -442,16 +430,35 @@ nav {
         .img-data {
             padding: 10px;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-start;
+            width: 100%;
             color: $secColor;
             font-size: 16px;
             transition: 300ms ease-out;
-            
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        
+
+            .img-name {
+                width: 100%;
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 20px;
+                transition: 300ms ease-out;
+            }
+
             &:hover{
                 background-color: rgba($color: #000, $alpha: 0.6);
+                justify-content: center;
+                align-items: center;
+
+                .img-name {
+                    font-size: 22px;
+                    font-weight: 700;
+                }
             }
         }
     }

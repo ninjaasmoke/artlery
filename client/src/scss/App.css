@@ -444,8 +444,8 @@ nav .placeholder-to-center {
   position: relative;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto auto auto;
-      grid-template-columns: auto auto auto;
+  -ms-grid-columns: auto auto auto auto;
+      grid-template-columns: auto auto auto auto;
 }
 
 .art span {
@@ -470,7 +470,14 @@ nav .placeholder-to-center {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
+  .art {
+    -ms-grid-columns: auto auto auto;
+        grid-template-columns: auto auto auto;
+  }
+}
+
+@media (max-width: 768px) {
   .art {
     padding: 0;
     padding-top: 28px;
@@ -486,8 +493,29 @@ nav .placeholder-to-center {
   }
 }
 
+@-webkit-keyframes artanim {
+  0% {
+    bottom: -20px;
+    opacity: 0;
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes artanim {
+  0% {
+    bottom: -20px;
+    opacity: 0;
+  }
+  100% {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
 .art-post {
-  float: left;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -523,27 +551,42 @@ nav .placeholder-to-center {
 .art-post .img-data-bg .img-data {
   padding: 10px;
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  width: 100%;
   color: #f0f0f0;
   font-size: 16px;
+  -webkit-transition: 300ms ease-out;
+  transition: 300ms ease-out;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.art-post .img-data-bg .img-data .img-name {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 20px;
   -webkit-transition: 300ms ease-out;
   transition: 300ms ease-out;
 }
 
 .art-post .img-data-bg .img-data:hover {
   background-color: rgba(0, 0, 0, 0.6);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.art-post .img-data-bg .img-data:hover .img-name {
+  font-size: 22px;
+  font-weight: 700;
 }
 
 .input {
