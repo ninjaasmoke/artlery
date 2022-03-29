@@ -57,6 +57,7 @@ const Search: React.FC<SearchProp> = () => {
                 <input type="text" name="search" id="search-text"
                     autoComplete="false" placeholder="Start searching"
                     // defaultValue={searchtext}
+                    className='search-input'
                     onChange={() => handleChange(searchtext)}
                 />
             </div>

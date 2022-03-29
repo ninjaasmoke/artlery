@@ -158,9 +158,12 @@ const Profile: React.FC<ProfileProps> = () => {
                                         <hr />
                                         <span>Username</span>
                                         <input type="text" name="" id="username-text"
+                                            className="login-input"
                                             autoComplete="false" onChange={() => handleText()} />
                                         <span>Password</span>
-                                        <input type="password" name="" id="password-text" onChange={() => handlePassword()} />
+                                        <input type="password" name="" id="password-text"
+                                            className="login-input"
+                                            onChange={() => handlePassword()} />
                                         <button onClick={() => handleLogIn()}>{loading}</button>
                                     </div>
                                     <div className="register">

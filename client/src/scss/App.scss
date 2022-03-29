@@ -10,10 +10,25 @@ $errorBg: #ff23233a;
 $errorBorder : #ff5757;
 $errorMes: #ff2020;
 
+
+// dark
+$accentColor: rgb(255, 255, 255);
+$inputBorderColor: grey;
+$secColor: #161618;
+$accent3Color: #ee2763;
+$grey: #242428;
+$accent2Color: #ec5252;
+$primColor: #0d0f10;
+$errorBg: #ff5757;
+$errorBorder : #ff5757;
+$errorMes: #ff2020;
+
 @font-face {
     font-family: 'Product';
     src: url('../fonts/Product Sans Regular.ttf');
 }
+
+$font: 'Poppins';
 
 ::-webkit-scrollbar {
     display: none;
@@ -29,7 +44,7 @@ $errorMes: #ff2020;
 body {
     background-color: $primColor;
     color: $accentColor;
-    font-family: 'Poppins', sans-serif;
+    font-family: $font, sans-serif;
 }
 
 nav {
@@ -201,7 +216,7 @@ nav {
             padding-right: 1px;
             font-weight: 700;
             font-size: 20px;
-            font-family: 'Poppins', sans-serif;
+            font-family: $font, sans-serif;
             @media (max-width: 767px) {
                 padding-right: 1px;
             }
@@ -440,6 +455,8 @@ nav {
         
 
             .img-name {
+                color: white;
+                font-weight: 900;
                 width: 100%;
                 text-align: center;
                 position: absolute;
@@ -457,7 +474,6 @@ nav {
 
                 .img-name {
                     font-size: 22px;
-                    font-weight: 700;
                 }
             }
         }
@@ -468,6 +484,10 @@ nav {
     width: 100%;
     display: flex;
     justify-content: center;
+    
+    input {
+        color: $accentColor;
+    }
 
     #search-text {
         width: 50%;
@@ -765,7 +785,7 @@ nav {
         text-decoration: none;
         outline: none;
         font-weight: 700;
-        font-family: 'Poppins';
+        font-family: $font;
         cursor: pointer;
         background-color: $accent2Color;
         transition-duration: 300ms;
@@ -806,7 +826,7 @@ nav {
     textarea {
         width: 100%;
         padding: 20px;
-        font-family: 'Poppins', sans-serif;
+        font-family: $font, sans-serif;
         font-size: 14px;
         border: none;
         outline: none;
@@ -822,7 +842,7 @@ nav {
         text-decoration: none;
         outline: none;
         font-weight: 700;
-        font-family: 'Poppins';
+        font-family: $font;
         cursor: pointer;
         background-color: $accent2Color;
         transition-duration: 300ms;
@@ -924,7 +944,7 @@ nav {
         }
 
         .login-form {
-            border: 0.1px solid $accentColor;
+            border: 0.1px solid $inputBorderColor;
             margin-top: 20px;
             border-radius: 8px;
             padding: 0px 12px 20px;
@@ -958,7 +978,8 @@ nav {
                 border-radius: 8px;
                 outline: none;
                 font-weight: 500;
-                font-family: 'Poppins';
+                font-family: $font;
+                color: $accentColor;
             }
 
             button {
@@ -968,7 +989,7 @@ nav {
                 border-radius: 8px;
                 outline: none;
                 font-weight: 700;
-                font-family: 'Poppins';
+                font-family: $font;
                 cursor: pointer;
                 background-image: linear-gradient(to bottom, $accent3Color, $accent2Color);
             }
@@ -1081,7 +1102,7 @@ nav {
                 padding: 8px 20px;
                 border-radius: 20px;
                 cursor: pointer;
-                font-family: 'Poppins';
+                font-family: $font;
                 font-size: 15px;
                 font-weight: 700;
                 transition-duration: 300ms;
@@ -1136,7 +1157,7 @@ nav {
                     border-radius: 4px;
                     padding: 8px;
                     outline: none;
-                    font-family: 'Poppins';
+                    font-family: $font;
                     cursor: pointer;
                 }
     
@@ -1179,7 +1200,7 @@ nav {
                 border-radius: 4px;
                 outline: none;
                 font-weight: 500;
-                font-family: 'Poppins';
+                font-family: $font;
             }
     
             .register-button {
@@ -1190,7 +1211,7 @@ nav {
                 border-radius: 8px;
                 outline: none;
                 font-weight: 700;
-                font-family: 'Poppins';
+                font-family: $font;
                 cursor: pointer;
                 background-image: linear-gradient(to bottom, $accent3Color, $accent2Color);
             }
@@ -1327,7 +1348,7 @@ nav {
                     background-color: rgba($color: $inputBorderColor, $alpha: 0.7);
                     font-size: 12px;
                     color: $secColor;
-                    font-family: 'Poppins';
+                    font-family: $font;
                     text-decoration: none;
                     padding: 2px 6px;
                     transition-duration: 300ms;
@@ -1383,7 +1404,7 @@ nav {
         text-decoration: none;
         outline: none;
         font-weight: 700;
-        font-family: 'Poppins';
+        font-family: $font;
         cursor: pointer;
         background-color: $accent2Color;
         transition-duration: 300ms;
@@ -1688,7 +1709,7 @@ nav {
         outline: none;
         font-weight: 500;
         width: 50%;
-        font-family: 'Poppins';
+        font-family: $font;
         @media (max-width: 767px) {
             width: 100%
         }
@@ -1709,7 +1730,7 @@ nav {
         text-decoration: none;
         outline: none;
         font-weight: 700;
-        font-family: 'Poppins';
+        font-family: $font;
         cursor: pointer;
         background-color: $accent2Color;
         transition-duration: 300ms;
@@ -1774,7 +1795,7 @@ nav {
             border-radius: 8px;
             outline: none;
             font-weight: 500;
-            font-family: 'Poppins';
+            font-family: $font;
         }
 
         button {
@@ -1786,7 +1807,7 @@ nav {
             text-decoration: none;
             outline: none;
             font-weight: 700;
-            font-family: 'Poppins';
+            font-family: $font;
             cursor: pointer;
             background-color: $accent2Color;
             transition-duration: 300ms;

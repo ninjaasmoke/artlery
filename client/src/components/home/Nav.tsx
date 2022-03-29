@@ -57,10 +57,11 @@ const Nav: React.FC<NavProp> = () => {
                 <div className="links">
                     <NavLink to="/home" label="Home" toggle={() => { }} />
                     <NavLink to="/search" label="Search" toggle={() => { }} />
+                    <NavLink to="/profile" label="Profile" toggle={() => { }} />
                     {/* <NavLink to="/orders" label="Orders" toggle={() => { }} /> */}
-                    <Link to="/profile" >
+                    {/* <Link to="/profile" >
                         <img src={User} alt="" className={pathName === '/profile' ? "color-bg" : ""} />
-                    </Link>
+                    </Link> */}
                 </div>
                 <div className={toggle} onClick={() => toggleNav()}>
                     <div className="bar1"></div>
